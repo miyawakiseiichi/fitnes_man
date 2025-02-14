@@ -1,0 +1,23 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* ボタンの統一デザイン */
+.btn-outline {
+  padding: 8px 16px;
+  border: 1px solid #555;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+.btn-outline:hover {
+  background-color: #555;
+  color: white;
+}
+.hover\:shadow-xl:hover {
+   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+.hover\:bg-blue-100:hover {
+  background-color: #ebf8ff;
+}
