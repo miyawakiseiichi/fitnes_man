@@ -1,0 +1,57 @@
+<div class="container mx-auto px-4">
+  <!-- ヘッダー -->
+  <header class="flex justify-between items-center py-6 border-b">
+    <h1 class="text-xl font-bold text-gray-700">トップページ</h1>
+    <nav class="space-x-4">
+      <a href="<%= new_user_registration_path %>" class="text-gray-700">会員登録</a>
+
+      <% if user_signed_in? %>
+        <a href="<%= edit_user_registration_path %>" class="text-gray-700">マイページ</a>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn-outline" %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn-outline" %>
+      <% end %>
+    </nav>
+  </header>
+
+  <!-- Hero セクション -->
+  <section class="bg-gray-100 py-16 text-center">
+    <h2 class="text-5xl font-bold text-gray-900">健康な毎日のために</h2>
+    <p class="text-lg text-gray-600 mt-4">Let’s マッチョ</p>
+  </section>
+
+  <!-- コンテンツ一覧 -->
+  <section class="my-12">
+    <h2 class="text-3xl font-bold text-center">コンテンツ一覧</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+      <% contents = [
+        ["プラン", "plan.jpg", "今後のあなたが続ける道をきめましょう", Rails.application.routes.url_helpers.plans_path],
+        ["ジム検索", "gym.jpg", "近くのジムを検索し、ジムの説明", Rails.application.routes.url_helpers.gyms_path],
+        ["タスク", "task.jpg", "自動で決められたメニュー以外にタスクを追加", Rails.application.routes.url_helpers.tasks_path],
+        ["サプリ検索", "supplement.jpg", "あなたのプランに合ったサプリを検索", Rails.application.routes.url_helpers.supplements_path],
+        ["プロテイン検索", "protein.jpg", "あなたのプランに合ったプロテインを検索", Rails.application.routes.url_helpers.proteins_path],
+        ["週間メニュー", "calendar.jpg", "あなたの毎日のメニュー", Rails.application.routes.url_helpers.weekly_menus_path]
+      ] %>
+
+      <% contents.each do |title, image, description, path| %>
+        <div class="text-center bg-white shadow-lg p-6 rounded-lg border">
+          <%= link_to path, class: "block" do %>
+            <button class="w-full h-full focus:outline-none">
+              <!-- 画像比率を統一 -->
+              <div class="w-full aspect-[16/9]">
+                <%= image_tag image, class: "w-full h-full object-contain rounded-md mb-4", alt: title %>
+              </div>
+              <h3 class="text-xl font-bold"><%= title %></h3>
+              <p class="text-gray-600 mt-2"><%= description %></p>
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer class="text-center py-8 text-gray-500">
+    <a href="<%= contact_path if defined?(contact_path) %>" class="text-gray-700">お問い合わせ (入力) ページ</a>
+  </footer>
+</div>
