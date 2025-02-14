@@ -20,7 +20,7 @@ services:
     tty: true
     stdin_open: true
     volumes:
-      - .:/fitnes_man_planner
+      - .:/fitnes_man
       # - bundle_data:/usr/local/bundle:cached
     environment:
       TZ: Asia/Tokyo
