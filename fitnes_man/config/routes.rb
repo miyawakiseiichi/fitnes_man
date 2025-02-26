@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   root 'home#index'
   get 'about', to: 'home#about'
+  get "/mypage", to: "users#show", as: :mypage
   resources :plans, only: [:index, :show]
   resources :sessions, only: [:new, :create, :destroy]
   resources :gyms
