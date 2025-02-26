@@ -3,11 +3,13 @@
   <header class="flex justify-between items-center py-6 border-b">
     <h1 class="text-xl font-bold text-gray-700">トップページ</h1>
     <nav class="space-x-4">
-      <a href="<%= new_user_registration_path %>" class="text-gray-700">会員登録</a>
+      <% unless user_signed_in? %>  <!-- ✅ 未ログインユーザーのみ表示 -->
+        <a href="<%= new_user_registration_path %>" class="text-gray-700">会員登録</a>
+      <% end %>
 
       <% if user_signed_in? %>
-        <a href="<%= edit_user_registration_path %>" class="text-gray-700">マイページ</a>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn-outline" %>
+        <a href="<%= mypage_path %>" class="text-gray-700">マイページ</a>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "btn-outline" %>
       <% else %>
         <%= link_to "ログイン", new_user_session_path, class: "btn-outline" %>
       <% end %>

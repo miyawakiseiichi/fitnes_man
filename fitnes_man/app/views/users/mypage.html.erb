@@ -1,0 +1,55 @@
+<div class="container mx-auto px-4 py-8">
+  <!-- マイページのヘッダー -->
+  <h1 class="text-4xl font-bold text-center mb-8">マイページ</h1>
+
+  <!-- プロフィール情報 -->
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-2xl font-bold mb-4">プロフィール情報</h2>
+    <p><strong>名前:</strong> <%= @user.name.presence || '未設定' %></p>
+    <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+    <p><strong>登録日:</strong> <%= @user.created_at.strftime('%Y年%m月%d日') %></p>
+    <div class="mt-4">
+      <%= link_to "プロフィール編集", edit_user_registration_path, class: "bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition" %>
+    </div>
+  </div>
+
+  <!-- プラン情報 -->
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-2xl font-bold mb-4">登録プラン</h2>
+    <% if @plan %>
+      <p class="text-lg font-semibold"><%= @plan.title %></p>
+      <p class="text-gray-600"><%= @plan.description %></p>
+    <% else %>
+      <p class="text-gray-600">登録されたプランはありません。</p>
+    <% end %>
+  </div>
+
+  <!-- タスク一覧 -->
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-2xl font-bold mb-4">タスクリスト</h2>
+    <% if @tasks.any? %>
+      <ul class="list-disc pl-5">
+        <% @tasks.each do |task| %>
+          <li class="text-lg"><%= task.name %> - <%= task.status %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-gray-600">タスクがありません。</p>
+    <% end %>
+  </div>
+
+  <!-- 週間メニュー & タスク -->
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <% @contents.each do |title, image, description, path| %>
+        <div class="text-center bg-gray-100 p-4 rounded-lg">
+          <%= link_to path, class: "block" do %>
+            <%= image_tag image, class: "w-full h-32 object-contain mx-auto rounded-md", alt: title %>
+            <p class="text-lg font-bold mt-2"><%= title %></p>
+            <p class="text-gray-600"><%= description %></p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>  
+</div>
