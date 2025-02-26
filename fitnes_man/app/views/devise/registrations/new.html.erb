@@ -1,0 +1,36 @@
+<div class="container">
+  <h1 class="title">会員登録</h1>
+  <div class="form-container">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :username, "ユーザー名", class: "form-label" %>
+        <%= f.text_field :username, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, "メールアドレス", class: "form-label" %>
+        <%= f.email_field :email, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "パスワード", class: "form-label" %>
+        <%= f.password_field :password, class: "form-input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "パスワード確認のため再度入力してください", class: "form-label" %>
+        <%= f.password_field :password_confirmation, class: "form-input" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "登録", class: "btn-submit" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="footer-links">
+    <a href="#">問い合わせ（入力）ページ</a>
+    <a href="#">利用規約ページ</a>
+    <a href="#">プライバシーポリシーページ</a>
+  </div>
+</div>

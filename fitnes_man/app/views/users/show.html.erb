@@ -1,0 +1,55 @@
+<div class="container mx-auto px-4 max-w-2xl">
+  <!-- マイページのタイトル -->
+  <h1 class="text-3xl font-bold text-center my-8">マイページ</h1>
+
+  <!-- ユーザー情報の表示 -->
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-xl font-semibold border-b pb-2 mb-4">ユーザー情報</h2>
+    <table class="w-full text-left border-collapse">
+      <tr class="border-b">
+        <th class="p-2 text-gray-700 w-1/3">ユーザー名</th>
+        <td class="p-2 text-gray-900"><%= current_user.name %></td>
+      </tr>
+      <tr class="border-b">
+        <th class="p-2 text-gray-700 w-1/3">メールアドレス</th>
+        <td class="p-2 text-gray-900"><%= current_user.email %></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 登録したプランの表示 -->
+  <div class="bg-gray-100 shadow-md rounded-lg p-6 mt-6">
+    <h2 class="text-xl font-semibold border-b pb-2 mb-4">登録したプラン</h2>
+    <% if current_user.plan.present? %>
+      <p class="text-gray-900 font-bold"><%= current_user.plan.try(:name) %></p>
+    <% else %>
+      <p class="text-gray-500">まだプランが登録されていません。</p>
+    <% end %>
+  </div>
+
+  <!-- コンテンツ一覧 -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+    <% contents = [
+      ["週間メニュー", "calendar.jpg", "あなたの毎日のメニュー", weekly_menus_path]
+    ] %>
+
+    <% contents.each do |title, image, description, path| %>
+      <div class="bg-white shadow-md p-4 rounded-lg text-center">
+        <%= link_to path, class: "block" do %>
+          <div class="w-full aspect-square mb-4">
+            <%= image_tag image, class: "w-full h-full object-cover rounded-md", alt: title %>
+          </div>
+          <h3 class="text-lg font-bold"><%= title %></h3>
+          <p class="text-gray-600 text-sm mt-2"><%= description %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- フッター -->
+  <footer class="text-center py-8 text-gray-500 mt-12">
+    <a href="<%= contact_path if defined?(contact_path) %>" class="text-gray-700">お問い合わせ (入力) ページ</a> |
+    <a href="#" class="text-gray-700">利用規約ページ</a> |
+    <a href="#" class="text-gray-700">プライバシーポリシーページ</a>
+  </footer>
+</div>
