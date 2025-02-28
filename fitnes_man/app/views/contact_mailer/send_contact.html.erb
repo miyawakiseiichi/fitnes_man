@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>新しいお問い合わせ</title>
+</head>
+<body>
+  <h1>お問い合わせがありました。</h1>
+  
+  <p><strong>ユーザー名：</strong> <%= @contact.name %></p>
+  <p><strong>メールアドレス：</strong> <%= @contact.email %></p>
+  <p><strong>お問い合わせ内容：</strong></p>
+  <p><%= @contact.message %></p>
+
+  <hr>
+  <p>このメールは自動送信されています。</p>
+</body>
+</html>
