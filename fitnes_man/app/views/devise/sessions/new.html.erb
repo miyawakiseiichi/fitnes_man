@@ -4,11 +4,11 @@
 
   <!-- ログインフォーム -->
   <div class="bg-white shadow-lg rounded-lg p-6 border">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: user_session_path, html: { class: "space-y-6" }) do |f| %>
       
       <!-- ユーザー名 or メールアドレス -->
       <div>
-        <%= f.label :email, "ユーザー名 or メールアドレス", class: "block font-semibold text-lg mb-2" %>
+        <%= f.label :email, "メールアドレス", class: "block font-semibold text-lg mb-2" %>
         <%= f.email_field :email, autofocus: true, class: "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600" %>
       </div>
 
@@ -27,7 +27,6 @@
 
   <!-- フッターリンク -->
   <div class="text-center mt-6 text-gray-500">
-    <%= link_to "会員登録", new_user_registration_path, class: "text-gray-700 hover:underline" %> |
-    <%= link_to "パスワードを忘れた方", new_user_password_path, class: "text-gray-700 hover:underline" %>
+    <%= link_to "会員登録", new_user_registration_path, class: "text-gray-700 hover:underline" %>
   </div>
 </div>
