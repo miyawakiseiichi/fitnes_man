@@ -1,11 +1,13 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    super do |user|
-      user.plan_id ||= Plan.first&.id  # ✅ `plan_id` が空ならデフォルト値を設定
-    end
+    super  # ✅ Devise の `create` を呼び出す
   end
 
   protected
+
+  def sign_up_params
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :plan_id, :frequency_id)
+  end
 
   def after_sign_up_path_for(resource)
     mypage_path  # 新規登録後のリダイレクト先をマイページに
