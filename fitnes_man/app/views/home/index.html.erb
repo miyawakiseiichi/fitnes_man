@@ -71,6 +71,6 @@
 
   <!-- フッター -->
   <footer class="text-center py-8 border-t text-gray-500">
-    <a href="<%= contact_path if defined?(contact_path) %>" class="text-gray-700 hover:text-blue-600">お問い合わせ (入力) ページ</a>
+    <%= link_to "お問い合わせ (入力) ページ", contact_path, class: "text-gray-700 hover:text-blue-600" %>
   </footer>
 </div>

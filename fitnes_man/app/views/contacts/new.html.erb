@@ -1,0 +1,26 @@
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-2xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+    <h1 class="text-3xl font-bold mb-6 text-gray-900 text-center">お問い合わせ</h1>
+
+    <%= form_with model: @contact, url: contacts_path, local: true do |f| %>
+      <div class="mb-4">
+        <%= f.label :name, "ユーザーネーム", class: "block text-lg font-semibold text-gray-800 mb-2" %>
+        <%= f.text_field :name, class: "w-full p-3 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :email, "メールアドレス", class: "block text-lg font-semibold text-gray-800 mb-2" %>
+        <%= f.email_field :email, class: "w-full p-3 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+      </div>
+
+      <div class="mb-6">
+        <%= f.label :message, "お問い合わせ内容", class: "block text-lg font-semibold text-gray-800 mb-2" %>
+        <%= f.text_area :message, class: "w-full p-3 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 h-40" %>
+      </div>
+
+      <div class="text-center">
+        <%= f.submit "確認へ", class: "bg-gray-500 text-white py-3 px-8 rounded-md text-lg font-semibold hover:bg-gray-600 transition" %>
+      </div>
+    <% end %>
+  </div>
+</div>
