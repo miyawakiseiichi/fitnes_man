@@ -27,6 +27,7 @@ end
 plans.each do |plan_data|
   Plan.find_or_create_by!(name: plan_data[:name]) do |plan|
     plan.description = plan_data[:description]
+    plan.save!
   end
 end
 
