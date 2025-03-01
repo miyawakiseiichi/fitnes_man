@@ -25,8 +25,6 @@ services:
     environment:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
-      RAILS_ENV: production
-      SECRET_KEY_BASE: your_generated_secret_key_here
     ports:
       - "${PORT:-3000}:3000"
     depends_on:

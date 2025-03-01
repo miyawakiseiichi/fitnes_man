@@ -1,15 +1,10 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.hosts << "fitnes-man.onrender.com"
-  config.secret_key_base = ENV["SECRET_KEY_BASE"]
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
-
-  #`SECRET_KEY_BASE` を環境変数から取得
-  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -26,7 +21,7 @@ Rails.application.configure do
   # config.require_master_key = true
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
-  config.public_file_server.enabled = false
+  # config.public_file_server.enabled = false
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -99,6 +94,7 @@ Rails.application.configure do
 
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
+
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
   #   "example.com",     # Allow requests from example.com
@@ -106,5 +102,4 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  puts "🚀 Allowed hosts: #{Rails.application.config.hosts.inspect}"
 end
