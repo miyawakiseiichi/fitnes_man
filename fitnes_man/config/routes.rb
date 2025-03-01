@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "weekly_menus/index"
+  get "weekly_menus/show"
   get "contacts/new"
   get "contacts/create"
 
@@ -21,7 +23,7 @@ Rails.application.routes.draw do
   resources :tasks
   resources :supplements
   resources :proteins
-  resources :weekly_menus
+  resources :weekly_menus, only: [:index, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

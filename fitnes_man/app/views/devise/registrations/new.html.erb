@@ -24,7 +24,7 @@
 
       <div class="field">
         <%= f.label :plan_id, "プランを選択", class: "form-label" %>
-        <%= f.select :plan_id, options_from_collection_for_select(Plan.where(id: [1, 2, 3]), :id, :name), prompt: "プランを選択", class: "form-input" %>
+        <%= f.select :plan_id, options_from_collection_for_select(Plan.all, :id, :name), prompt: "プランを選択", class: "form-input" %>
       </div>
 
       <div class="field">
