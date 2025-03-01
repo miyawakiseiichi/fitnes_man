@@ -38,3 +38,6 @@ COPY bin /fitnes_man/bin
 
 # ✅ `bin/dev` に実行権限を付与
 RUN chmod +x /fitnes_man/bin/dev
+
+# サーバー起動コマンド
+CMD ["sh", "-c", "bin/rails server -b 0.0.0.0 -p $PORT"]
