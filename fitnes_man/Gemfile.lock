@@ -110,6 +110,8 @@ GEM
     drb (2.2.1)
     error_highlight (0.7.0)
     erubi (1.13.1)
+    erubis (2.7.0)
+    excon (0.112.0)
     ffi (1.17.1-aarch64-linux-gnu)
     ffi (1.17.1-aarch64-linux-musl)
     ffi (1.17.1-arm-linux-gnu)
@@ -120,6 +122,19 @@ GEM
     ffi (1.17.1-x86_64-linux-musl)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    heroics (0.1.3)
+      base64
+      erubis (~> 2.0)
+      excon
+      moneta
+      multi_json (>= 1.9.2)
+      webrick
+    heroku_hatchet (8.0.4)
+      excon (~> 0)
+      platform-api (~> 3)
+      rrrretry (~> 1)
+      thor (~> 1)
+      threaded (~> 0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -155,7 +170,9 @@ GEM
       logger
     mini_mime (1.1.5)
     minitest (5.25.4)
+    moneta (1.0.0)
     msgpack (1.8.0)
+    multi_json (1.15.0)
     mysql2 (0.5.6)
     net-imap (0.5.6)
       date
@@ -188,6 +205,10 @@ GEM
     parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
+    platform-api (3.7.0)
+      heroics (~> 0.1.1)
+      moneta (~> 1.0.0)
+      rate_throttle_client (~> 0.1.0)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -237,6 +258,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    rate_throttle_client (0.1.2)
     rdoc (6.12.0)
       psych (>= 4.0.0)
     redis (5.3.0)
@@ -250,6 +272,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.4.0)
+    rrrretry (1.0.0)
     rubocop (1.71.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -311,6 +334,7 @@ GEM
     tailwindcss-ruby (4.0.6-x86_64-linux-gnu)
     tailwindcss-ruby (4.0.6-x86_64-linux-musl)
     thor (1.3.2)
+    threaded (0.0.4)
     timeout (0.4.3)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
@@ -328,6 +352,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webrick (1.9.1)
     websocket (1.2.11)
     websocket-driver (0.7.7)
       base64
@@ -357,6 +382,7 @@ DEPENDENCIES
   debug
   devise
   error_highlight (>= 0.4.0)
+  heroku_hatchet
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
