@@ -1,0 +1,23 @@
+databases:
+  - name: fitnes_man_db  # データベースの名前
+    databaseName: fitnes_man_production  # 実際のデータベース名
+    user: fitnes_man_user  # データベースのユーザー名
+    region: singapore  # データベースの設置リージョン
+
+services:
+  - type: web
+    name: fitnes_man_app  # アプリのサービス名
+    region: singapore
+    plan: free
+    runtime: docker
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fitnes_man_db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_MASTER_KEY
+        sync: false
