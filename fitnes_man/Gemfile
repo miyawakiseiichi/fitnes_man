@@ -6,7 +6,6 @@ gem "rails", "~> 7.2.2", ">= 7.2.2.1"
 gem "sprockets-rails"
 
 gem 'devise'
-
 #通知系
 gem 'redis'
 gem 'actioncable'
