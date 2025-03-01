@@ -27,6 +27,15 @@
     <% end %>
   </div>
 
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+  <h2 class="text-2xl font-bold mb-4">ジムの利用頻度</h2>
+  <% if current_user.frequency %>
+    <p class="text-lg font-semibold"><%= current_user.frequency.name %></p>
+  <% else %>
+    <p class="text-gray-600">登録された頻度はありません。</p>
+  <% end %>
+</div>
+
   <!-- コンテンツ一覧 -->
   <div class="flex flex-col items-center justify-center mt-8">
     <% contents = [

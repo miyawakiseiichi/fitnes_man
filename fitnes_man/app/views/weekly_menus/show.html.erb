@@ -1,0 +1,4 @@
+<!-- app/views/weekly_menus/show.html.erb -->
+<h1 class="text-3xl font-bold"><%= @weekly_menu.name %></h1>
+<p class="text-lg text-gray-600 mt-2"><%= @weekly_menu.description %></p>
+<%= link_to "戻る", weekly_menus_path, class: "text-blue-600 hover:underline" %>
