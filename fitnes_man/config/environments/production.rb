@@ -1,11 +1,14 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.hosts.clear
+  config.hosts << "fitnes-man.onrender.com"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
+
+  #`SECRET_KEY_BASE` を環境変数から取得
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -22,7 +25,7 @@ Rails.application.configure do
   # config.require_master_key = true
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
-  # config.public_file_server.enabled = false
+  config.public_file_server.enabled = false
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
