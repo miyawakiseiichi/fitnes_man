@@ -15,7 +15,7 @@ services:
       retries: 3
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b 0.0.0.0"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p ${PORT:-3000} -b 0.0.0.0"
     container_name: fitnes_man_container
     tty: true
     stdin_open: true
@@ -26,7 +26,7 @@ services:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
     ports:
-      - "3000:3000"
+      - "${PORT:-3000}:3000"
     depends_on:
       - db
       - chrome
