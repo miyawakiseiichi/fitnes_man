@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_01_161043) do
   create_table "contacts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
   end
 
   create_table "plans", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", default: 1
+    t.bigint "user_id"
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
@@ -54,11 +54,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
     t.datetime "updated_at", null: false
     t.string "name", default: ""
     t.string "username"
-    t.bigint "plan_id", null: false
     t.integer "frequency_id", default: 4, null: false
     t.string "plan_type"
+    t.integer "plan_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["plan_id"], name: "index_users_on_plan_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
