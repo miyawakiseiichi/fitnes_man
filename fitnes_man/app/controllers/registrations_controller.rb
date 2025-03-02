@@ -5,6 +5,10 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def set_plans
+    @plans = Plan.all
+  end
+
   def sign_up_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :plan_id, :frequency_id)
   end
