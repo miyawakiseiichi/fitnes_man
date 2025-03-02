@@ -15,4 +15,4 @@ bundle exec rake assets:precompile  # CSSをSprocketsでコンパイル
 # DBマイグレーション（ridgepoleを使う場合）
 bundle exec ridgepole -c config/database.yml -E production --apply -f db/schemas/Schemafile
 # ※ ridgepole を使わない場合は ↓ のコマンドに変更
-# bundle exec rails db:migrate
+bundle exec rails db:migrate

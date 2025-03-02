@@ -35,4 +35,8 @@ test:
 production:
   <<: *default
   database: fitnes_man_production
+  username: <%= ENV['DATABASE_USER'] || 'postgres' %>   # ✅ 環境変数がない場合のデフォルト値
+  password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>  # ✅ 環境変数がない場合のデフォルト値
+  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  port: <%= ENV['DATABASE_PORT'] || 5432 %>
   # database: path/to/persistent/storage/production.sqlite3

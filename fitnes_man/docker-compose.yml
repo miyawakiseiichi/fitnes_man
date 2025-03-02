@@ -30,8 +30,10 @@ services:
     ports:
       - "${PORT:-3000}:3000"
     depends_on:
-      - db
-      - chrome
+      db:
+        condition: service_healthy
+      chrome:
+        condition: service_started
   chrome:
     image: seleniarm/standalone-chromium:latest
     ports:
