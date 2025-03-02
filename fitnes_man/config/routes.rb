@@ -1,19 +1,12 @@
 Rails.application.routes.draw do
-  get "weekly_menus/index"
-  get "weekly_menus/show"
-  get "contacts/new"
-  get "contacts/create"
 
   devise_for :users, controllers: { registrations: 'registrations' }
 
   root 'home#index'
 
-  resources :contacts, only: [:new, :create]
-
   get 'about', to: 'home#about'
   get "/mypage", to: "users#show", as: :mypage
   get 'contact', to: 'contacts#new', as: 'contact'
-  get 'about', to: 'home#about'
   resources :contacts, only: [:new, :create] do
     get 'thank_you', on: :collection  # /contacts/thank_you を定義
   end

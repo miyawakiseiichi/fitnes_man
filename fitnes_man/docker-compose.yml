@@ -1,15 +1,17 @@
 services:
   db:
-    image: mysql:8.0
+    image: postgres:15
     environment:
       TZ: Asia/Tokyo
-      MYSQL_ROOT_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fitnes_man_development
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - 3307:3306
+      - 5432:5432
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -21,10 +23,10 @@ services:
     stdin_open: true
     volumes:
       - .:/fitnes_man
-      # - bundle_data:/usr/local/bundle:cached
     environment:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+      DATABASE_URL: "postgres://postgres:password@db:5432/fitnes_man_development"
     ports:
       - "${PORT:-3000}:3000"
     depends_on:
@@ -35,6 +37,6 @@ services:
     ports:
       - 4444:4444
 volumes:
-  mysql_data:
+  postgres_data:
   bundle_data:
   node_modules:

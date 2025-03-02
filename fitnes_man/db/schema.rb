@@ -10,8 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
-  create_table "contacts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2025_03_02_093923) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "contacts", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.text "message"
@@ -19,14 +22,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "frequencies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "frequencies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "plans", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", default: 1
+  create_table "plans", force: :cascade do |t|
+    t.bigint "user_id"
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
@@ -35,7 +38,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
-  create_table "tasks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tasks", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.string "status"
@@ -44,7 +47,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -54,24 +57,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_01_050553) do
     t.datetime "updated_at", null: false
     t.string "name", default: ""
     t.string "username"
-    t.bigint "plan_id", null: false
     t.integer "frequency_id", default: 4, null: false
     t.string "plan_type"
+    t.integer "plan_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["plan_id"], name: "index_users_on_plan_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "weekly_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "weekly_menus", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "plan_type"
     t.integer "plan_id"
-    t.integer "day_of_week"
   end
 
   add_foreign_key "plans", "users"
   add_foreign_key "tasks", "users"
+  add_foreign_key "users", "plans"
 end
