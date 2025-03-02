@@ -3,16 +3,16 @@
 set -o errexit
 
 # Ruby & JSの依存関係をインストール
-bundle install
-yarn install
+docker compose exec web bundle install
+docker compose exec web yarn install
 
 # フロントエンドのビルド
-yarn build  # JavaScriptをesbuildでバンドル（必要に応じて変更）
+docker compose exec web yarn build  # JavaScriptをesbuildでバンドル（必要に応じて変更）
 
 # アセットのプリコンパイル
-bundle exec rake assets:precompile  # CSSをSprocketsでコンパイル
+docker compose exec web bundle exec rake assets:precompile  # CSSをSprocketsでコンパイル
 
 # DBマイグレーション（ridgepoleを使う場合）
-bundle exec ridgepole -c config/database.yml -E production --apply -f db/schemas/Schemafile
-# ※ ridgepole を使わない場合は ↓ のコマンドに変更
-bundle exec rails db:migrate
+docker compose exec web bundle exec ridgepole -c config/database.yml -E production --apply -f db/schemas/Schemafile
+# ridgepole を使わない場合
+docker compose exec web bundle exec rails db:migrate
