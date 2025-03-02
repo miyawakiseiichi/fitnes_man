@@ -1,14 +1,23 @@
 databases:
-  - name: fitnes_man_db
+  # Staging 環境用の DB
+  - name: fitnes_man_db_staging
+    databaseName: fitnes_man_staging
+    user: fitnes_man_user
+    region: singapore
+    ipAllowList: []  # すべてのIPを許可
+
+  # Production 環境用の DB
+  - name: fitnes_man_db_production
     databaseName: fitnes_man_production
     user: fitnes_man_user
     region: singapore
-    ipAllowList: []  # すべてのIPを許可（必要に応じて制限）
+    ipAllowList: []  # すべてのIPを許可
 
 services:
+  # Staging 環境
   - type: web
-    name: fitnes_man_app
-    runtime: ruby  # ✅ runtime を追加（Rubyを指定）
+    name: fitnes_man_staging
+    runtime: ruby
     region: singapore
     plan: free
     buildCommand: "./bin/render-build.sh"
@@ -16,9 +25,29 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: fitnes_man_db
+          name: fitnes_man_db_staging
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
       - key: PORT
         value: "3000"
+    autoDeploy: true  # Staging は自動デプロイ
+
+  # Production 環境
+  - type: web
+    name: fitnes_man_production
+    runtime: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: fitnes_man_db_production
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: PORT
+        value: "3000"
+    autoDeploy: false  # ✅ 本番は手動デプロイにする
