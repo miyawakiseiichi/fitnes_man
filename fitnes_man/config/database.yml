@@ -5,13 +5,13 @@
 #   gem "sqlite3"
 #
 default: &default
-  adapter: mysql2
-  encoding: utf8mb4
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: password
-  host: db
-  port: 3306
+  username: <%= ENV['DATABASE_USER'] || 'postgres' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
+  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  port: <%= ENV['DATABASE_PORT'] || 5432 %>
 
 
 development:
@@ -33,8 +33,6 @@ test:
 # Similarly, if you deploy your application as a Docker container, you must
 # ensure the database is located in a persisted volume.
 production:
-  adapter: mysql2
-  encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV['DATABASE_URL'] %>  # ✅ DATABASE_URL を使う
+  <<: *default
+  database: fitnes_man_production
   # database: path/to/persistent/storage/production.sqlite3
