@@ -29,7 +29,7 @@
 
       <div class="field">
         <%= f.label :frequency_id, "ジムの利用頻度を選択", class: "form-label" %>
-        <%= f.select :frequency_id, options_from_collection_for_select(Frequency.all, :id, :name), prompt: "頻度を選択", class: "form-input" %>
+        <%= f.select :frequency_id, options_from_collection_for_select(Frequency.all, :id, :name), prompt: "利用頻度を選択", class: "form-input" %>
       </div>
 
       <div class="actions">
