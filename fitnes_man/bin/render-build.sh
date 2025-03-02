@@ -12,7 +12,5 @@ docker compose exec web yarn build  # JavaScriptをesbuildでバンドル（必�
 # アセットのプリコンパイル
 docker compose exec web bundle exec rake assets:precompile  # CSSをSprocketsでコンパイル
 
-# DBマイグレーション（ridgepoleを使う場合）
-docker compose exec web bundle exec ridgepole -c config/database.yml -E production --apply -f db/schemas/Schemafile
 # ridgepole を使わない場合
 docker compose exec web bundle exec rails db:migrate
