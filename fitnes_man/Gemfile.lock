@@ -172,8 +172,6 @@ GEM
     minitest (5.25.4)
     moneta (1.0.0)
     msgpack (1.8.0)
-    multi_json (1.15.0)
-    mysql2 (0.5.6)
     net-imap (0.5.6)
       date
       net-protocol
@@ -205,6 +203,7 @@ GEM
     parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
+    pg (1.5.9)
     platform-api (3.7.0)
       heroics (~> 0.1.1)
       moneta (~> 1.0.0)
@@ -386,7 +385,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
-  mysql2 (~> 0.5)
+  pg
   puma (>= 5.0)
   rails (~> 7.2.2, >= 7.2.2.1)
   redis
