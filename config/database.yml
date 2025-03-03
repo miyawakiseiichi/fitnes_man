@@ -27,7 +27,7 @@ test:
   database: fitnes_man_test
   username: <%= ENV['DATABASE_USER'] || 'postgres' %>
   password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
-  host: db
+  host: <%= ENV['DATABASE_HOST'] || 'db' %>
   pool: <%= ENV['DATABASE_PORT'] || 5432 %>
 
 
