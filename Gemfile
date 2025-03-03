@@ -7,6 +7,7 @@ gem "sprockets-rails"
 
 gem 'devise'
 
+gem "heroku_hatchet"
 #通知系
 gem 'redis'
 gem 'actioncable'
