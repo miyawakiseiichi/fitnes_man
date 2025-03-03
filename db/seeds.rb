@@ -50,32 +50,32 @@ advanced_plan = Plan.find_by!(title: "ゴリマッチョ")
 
 weekly_menus = [
   # 健康維持
-  {name: "月曜日", description: "軽いストレッチ・ウォーキング", plan_id: soft_plan&.id},
-  {name: "火曜日", description: "自重スクワット・プランク", plan_id: soft_plan&.id},
-  {name: "水曜日", description: "休息日", plan_id: soft_plan&.id},
-  {name: "木曜日", description: "休息日", plan_id: soft_plan&.id},
-  {name: "金曜日", description: "休息日", plan_id: soft_plan&.id},
-  {name: "土曜日", description: "休息日", plan_id: soft_plan&.id},
-  {name: "日曜日", description: "休息日", plan_id: soft_plan&.id},
+  { name: "月曜日", description: "軽いストレッチ・ウォーキング", plan_id: soft_plan&.id },
+  { name: "火曜日", description: "自重スクワット・プランク", plan_id: soft_plan&.id },
+  { name: "水曜日", description: "休息日", plan_id: soft_plan&.id },
+  { name: "木曜日", description: "休息日", plan_id: soft_plan&.id },
+  { name: "金曜日", description: "休息日", plan_id: soft_plan&.id },
+  { name: "土曜日", description: "休息日", plan_id: soft_plan&.id },
+  { name: "日曜日", description: "休息日", plan_id: soft_plan&.id },
 
   # ダイエット
-  {name: "月曜日", description: "スクワット・ベンチプレス・デッドリフト", plan_id: diet_plan&.id},
-  {name: "火曜日", description: "ランニング・プランク・腹筋", plan_id: diet_plan&.id},
-  {name: "水曜日", description: "休息日", plan_id: diet_plan&.id},
-  {name: "木曜日", description: "休息日", plan_id: diet_plan&.id},
-  {name: "金曜日", description: "休息日", plan_id: diet_plan&.id},
-  {name: "土曜日", description: "休息日", plan_id: diet_plan&.id},
-  {name: "日曜日", description: "休息日", plan_id: diet_plan&.id},
+  { name: "月曜日", description: "スクワット・ベンチプレス・デッドリフト", plan_id: diet_plan&.id },
+  { name: "火曜日", description: "ランニング・プランク・腹筋", plan_id: diet_plan&.id },
+  { name: "水曜日", description: "休息日", plan_id: diet_plan&.id },
+  { name: "木曜日", description: "休息日", plan_id: diet_plan&.id },
+  { name: "金曜日", description: "休息日", plan_id: diet_plan&.id },
+  { name: "土曜日", description: "休息日", plan_id: diet_plan&.id },
+  { name: "日曜日", description: "休息日", plan_id: diet_plan&.id },
 
 
   # ゴリマッチョ
-  {name: "月曜日", description: "ベンチプレス・インクラインベンチプレス・ディップス・ダンベルフライ", plan_id: advanced_plan&.id},
-  {name: "火曜日", description: "懸垂", plan_id: advanced_plan&.id},
-  {name: "水曜日", description: "レッグプレス", plan_id: advanced_plan&.id},
-  {name: "木曜日", description: "ショルダープレス", plan_id: advanced_plan&.id},
-  {name: "金曜日", description: "休息日", plan_id: advanced_plan&.id},
-  {name: "土曜日", description: "休息日", plan_id: advanced_plan&.id},
-  {name: "日曜日", description: "休息日", plan_id: advanced_plan&.id},
+  { name: "月曜日", description: "ベンチプレス・インクラインベンチプレス・ディップス・ダンベルフライ", plan_id: advanced_plan&.id },
+  { name: "火曜日", description: "懸垂", plan_id: advanced_plan&.id },
+  { name: "水曜日", description: "レッグプレス", plan_id: advanced_plan&.id },
+  { name: "木曜日", description: "ショルダープレス", plan_id: advanced_plan&.id },
+  { name: "金曜日", description: "休息日", plan_id: advanced_plan&.id },
+  { name: "土曜日", description: "休息日", plan_id: advanced_plan&.id },
+  { name: "日曜日", description: "休息日", plan_id: advanced_plan&.id }
 
 ]
 weekly_menus.each do |menu|
@@ -87,7 +87,7 @@ weekly_menus.each do |menu|
   end
 end
 puts "✅ WeeklyMenu データ作成完了"
-=======
+
 plans.each do |plan_data|
   Plan.find_or_create_by!(name: plan_data[:name]) do |plan|
     plan.description = plan_data[:description]

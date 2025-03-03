@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:edit, :update, :destroy]  # ❌ show を削除
+  before_action :set_user, only: [ :edit, :update, :destroy ]  # ❌ show を削除
 
   def new
     @user = User.new
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user  
+    @user = current_user
     render "users/show"
   end
 

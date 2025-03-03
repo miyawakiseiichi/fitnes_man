@@ -1,22 +1,21 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { registrations: "registrations" }
 
-  devise_for :users, controllers: { registrations: 'registrations' }
+  root "home#index"
 
-  root 'home#index'
-
-  get 'about', to: 'home#about'
+  get "about", to: "home#about"
   get "/mypage", to: "users#show", as: :mypage
-  get 'contact', to: 'contacts#new', as: 'contact'
-  resources :contacts, only: [:new, :create] do
-    get 'thank_you', on: :collection  # /contacts/thank_you を定義
+  get "contact", to: "contacts#new", as: "contact"
+  resources :contacts, only: [ :new, :create ] do
+    get "thank_you", on: :collection  # /contacts/thank_you を定義
   end
-  resources :plans, only: [:index, :show]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :plans, only: [ :index, :show ]
+  resources :sessions, only: [ :new, :create, :destroy ]
   resources :gyms
   resources :tasks
   resources :supplements
   resources :proteins
-  resources :weekly_menus, only: [:index, :show]
+  resources :weekly_menus, only: [ :index, :show ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
