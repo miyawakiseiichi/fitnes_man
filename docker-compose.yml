@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:15
+    container_name: fitnes_man-db-1
     environment:
       TZ: Asia/Tokyo
       POSTGRES_USER: postgres
@@ -26,7 +27,11 @@ services:
     environment:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
-      DATABASE_URL: "postgres://postgres:password@db:5432/fitnes_man_development"
+      DATABASE_URL: "postgres://postgres:password@db:5432/fitnes_man_test"
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: password
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
       RAILS_MAX_THREADS: 20
     ports:
       - "${PORT:-3000}:3000"
