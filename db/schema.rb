@@ -74,5 +74,4 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_02_093923) do
 
   add_foreign_key "plans", "users"
   add_foreign_key "tasks", "users"
-  add_foreign_key "users", "plans"
 end
