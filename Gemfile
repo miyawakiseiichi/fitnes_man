@@ -14,6 +14,8 @@ gem "actioncable"
 
 gem "tailwindcss-rails"
 
+ruby "3.2.2"
+
 gem "pg"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
