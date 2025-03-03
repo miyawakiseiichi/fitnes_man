@@ -27,6 +27,7 @@ services:
       TZ: Asia/Tokyo
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
       DATABASE_URL: "postgres://postgres:password@db:5432/fitnes_man_development"
+      RAILS_MAX_THREADS: 20
     ports:
       - "${PORT:-3000}:3000"
     depends_on:
