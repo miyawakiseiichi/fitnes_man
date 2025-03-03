@@ -30,6 +30,9 @@ RUN bundle install
 COPY yarn.lock /fitnes_man/yarn.lock
 RUN yarn install
 
+
+RUN apt update && apt install -y postgresql-client
+
 # アプリ全体をコピー
 COPY . /fitnes_man/
 
