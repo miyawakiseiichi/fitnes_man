@@ -347,7 +347,7 @@ DEPENDENCIES
   capybara
   debug
   devise
-  error_highlight (>= 0.4.0)
+  error_highlight (>= 0.7.0)
   heroku_hatchet
   image_processing (~> 1.2)
   importmap-rails
