@@ -1,4 +1,4 @@
-FROM ruby:3.1.4
+FROM ruby:3.2.2
 
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
@@ -29,6 +29,9 @@ RUN bundle install
 # Yarn 関連のインストール
 COPY yarn.lock /fitnes_man/yarn.lock
 RUN yarn install
+
+
+RUN apt update && apt install -y postgresql-client
 
 # アプリ全体をコピー
 COPY . /fitnes_man/
