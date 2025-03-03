@@ -34,9 +34,9 @@ user.update!(
 puts "✅ User: #{user.inspect}"  # ユーザーが正しく作成されているか確認
 
 plans = [
-  { title: "健康維持", description: "ライトなトレーニングプラン", user_id: user.id },
-  { title: "ダイエット", description: "バランスの取れたトレーニングプラン", user_id: user.id },
-  { title: "ゴリマッチョ", description: "ハードトレーニングプラン", user_id: user.id }
+  { name: "健康維持", title: "健康維持", description: "ライトなトレーニングプラン", user_id: user.id },
+  { name: "ダイエット", title: "ダイエット", description: "バランスの取れたトレーニングプラン", user_id: user.id },
+  { name: "ゴリマッチョ", title: "ゴリマッチョ", description: "ハードトレーニングプラン", user_id: user.id }
 ]
 plans.each do |plan|
   puts "🛠️ Creating plan: #{plan.inspect}" # デバッグ用出力
