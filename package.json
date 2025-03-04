@@ -1,0 +1,26 @@
+{
+  "name": "fitnes_man",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miyawakiseiichi/fitnes_man.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/miyawakiseiichi/fitnes_man/issues"
+  },
+  "homepage": "https://github.com/miyawakiseiichi/fitnes_man#readme"
+}
