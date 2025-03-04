@@ -5,12 +5,9 @@ class ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    if @contact.save
+    @contact.save
       ContactMailer.send_contact(@contact).deliver_now
       redirect_to thank_you_contacts_path
-    else
-      render :new, status: :unprocessable_entity
-    end
   end
 
   def thank_you
