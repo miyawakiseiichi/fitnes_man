@@ -3,8 +3,8 @@
 set -o errexit
 
 # Ruby & JSの依存関係をインストール
-bundle install
-yarn install
+docker compose run web bundle install
+docker compose run web yarn install
 
 # フロントエンドのビルド
 yarn build  # JavaScriptをesbuildでバンドル（必要に応じて変更）
