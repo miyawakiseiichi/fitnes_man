@@ -13,4 +13,5 @@ yarn build  # JavaScriptをesbuildでバンドル（必要に応じて変更）
 bundle exec rake assets:precompile  # CSSをSprocketsでコンパイル
 
 # ridgepole を使わない場合
+bundle exec rails db:seed
 bundle exec rails db:migrate
