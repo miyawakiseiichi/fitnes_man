@@ -1,0 +1,33 @@
+ja:
+  devise:
+    failure:
+      unauthenticated: "ログインしてください"
+      invalid: "メールアドレスまたはパスワードが間違っています"
+      not_found_in_database: "メールアドレスまたはパスワードが間違っています"
+      unconfirmed: "メールアドレスの確認が必要です"
+      locked: "アカウントがロックされています"
+      timeout: "セッションがタイムアウトしました"
+      already_authenticated: "すでにログインしています"
+
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード確認"
+        username: "ユーザー名"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "を入力してください"
+              taken: "はすでに登録されています"
+            password:
+              blank: "を入力してください"
+              too_short: "は6文字以上入力してください"
+            password_confirmation:
+              confirmation: "がパスワードと一致しません"
+            username:
+              blank: "を入力してください"
+              taken: "はすでに使用されています"
