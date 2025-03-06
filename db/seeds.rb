@@ -23,12 +23,15 @@ frequencies.each do |name|
 end
 puts "✅ Frequency データ作成完了"
 
+plan = Plan.first || Plan.create!(name: "健康維持", title: "健康維持", description: "ライトなトレーニングプラン")
+
 user = User.find_or_initialize_by(email: "test@example.com")
 user.update!(
   password: "password",  # Devise の `password` は `update!` で設定する
   password_confirmation: "password",
   name: "テストユーザー",
   username: "testuser",
+  plan_id: plan.id,
   frequency: Frequency.first
 )
 puts "✅ User: #{user.inspect}"  # ユーザーが正しく作成されているか確認
