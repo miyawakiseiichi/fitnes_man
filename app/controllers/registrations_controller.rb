@@ -1,6 +1,15 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    super  # ✅ Devise の `create` を呼び出す
+    build_resource(sign_up_params)
+
+    if resource.save
+      flash[:notice] = "ユーザー登録が完了しました！"
+      sign_up(resource_name, resource)
+      redirect_to after_sign_up_path_for(resource) # mypage_path にリダイレクト
+    else
+      flash.now[:alert] = resource.errors.full_messages.join("、")
+      render :new, status: :unprocessable_entity
+    end
   end
 
   protected
