@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id  # ログイン状態にする
       redirect_to mypage_path, notice: "ユーザー登録が完了しました！"
     else
-      flash.now[:alert] = "登録に失敗しました。"
+      flash.now[:alert] = @user.errors.full_messages.join("、")
       render :new, status: :unprocessable_entity
     end
   end
