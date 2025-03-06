@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  before_action :authenticate_user! # ユーザー認証が必要
   def new
     @contact = Contact.new
   end
