@@ -31,3 +31,7 @@ ja:
             username:
               blank: "を入力してください"
               taken: "はすでに使用されています"
+            plan_id:
+              blank: "を選択してください"
+            frequency_id:
+              blank: "を選択してください"
