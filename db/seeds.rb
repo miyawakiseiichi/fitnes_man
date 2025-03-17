@@ -41,9 +41,11 @@ plans = [
   { name: "ダイエット", title: "ダイエット", description: "バランスの取れたトレーニングプラン", user_id: user.id },
   { name: "ゴリマッチョ", title: "ゴリマッチョ", description: "ハードトレーニングプラン", user_id: user.id }
 ]
-plans.each do |plan|
-  puts "🛠️ Creating plan: #{plan.inspect}" # デバッグ用出力
-  Plan.create!(plan)
+plans.each do |plan_data|
+  Plan.find_or_create_by!(name: plan_data[:name]) do |plan|
+    plan.title = plan_data[:title]
+    plan.description = plan_data[:description]
+  end
 end
 puts "✅ Plan データ作成完了"
 
