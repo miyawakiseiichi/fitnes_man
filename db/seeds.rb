@@ -11,6 +11,7 @@ Plan.destroy_all
 WeeklyMenu.destroy_all
 Frequency.destroy_all
 User.destroy_all
+Gym.destroy_all
 
 frequencies = [
   "週1回",

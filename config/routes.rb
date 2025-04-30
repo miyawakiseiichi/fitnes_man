@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   end
   resources :plans, only: [ :index, :show ]
   resources :sessions, only: [ :new, :create, :destroy ]
-  resources :gyms
+  resources :gyms, only: [:index, :new, :create] do
+    collection do
+      get :import_from_google
+    end
+  end
   resources :tasks
   resources :supplements
   resources :proteins

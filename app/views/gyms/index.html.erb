@@ -1,4 +1,188 @@
-<div class="alert alert-warning">
-  <h2>🚧 開発中 🚧</h2>
-  <p>この機能は現在開発中です。本リリースまでお待ちください。</p>
-</div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>現在地からジム検索</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .location-button {
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      display: block;
+      margin: 30px auto;
+    }
+
+    .location-button:hover {
+      background-color: #3367D6;
+    }
+
+    .location-button:active {
+      background-color: #2A56C6;
+      transform: scale(0.97);
+    }
+
+    section {
+      background-color: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    #pre-description {
+      margin-top: 40px;
+      border-left: 6px solid #4285F4;
+    }
+
+    #gym-description {
+      border-left: 6px solid #34A853;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 20px;
+      color: #222;
+    }
+
+    .gym-card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      border-left: 4px solid #fbbc05;
+    }
+
+    .gym-card strong {
+      font-size: 17px;
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    #opinion-area {
+      display: none;
+      margin-top: 30px;
+      padding: 16px;
+      border-radius: 8px;
+      background-color: #fff3cd;
+      color: #856404;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 🔰 事前説明 -->
+    <section id="pre-description">
+      <h2>💡 このページでできること</h2>
+      <p>
+        「📍現在地からジムを検索」ボタンを押すと、あなたの現在地を取得し、<strong>近くにあるジムをGoogleで自動検索</strong>します。<br>
+        高評価のジムがすぐに見つかるかもしれません！ぜひ活用してください。
+      </p>
+    </section>
+
+    <!-- ボタン -->
+    <button class="location-button" onclick="importGymsFromCurrentLocation()">
+      📍 現在地からジムを検索
+    </button>
+
+    <!-- 意見表示 -->
+    <div id="opinion-area">
+      <p id="opinion-text"></p>
+    </div>
+
+    <!-- ジム説明 -->
+    <section id="gym-description">
+      <h2>🏋️‍♀️ ジム情報について</h2>
+      <p>
+        このページでは、あなたの現在地に基づいて周辺のジムを検索できます。<br>
+        例えば、Googleマップで評価の高いジムや、距離が近い順に候補が見つかります。<br>
+        検索後、ジムの名前・住所・評価（★）が表示されるので、<strong>通いやすい場所・目的に合った施設</strong>を見つけましょう！
+      </p>
+    </section>
+
+    <!-- よく紹介されるジム -->
+    <section id="predefined-gyms">
+      <h2>🏋️‍♂️ よく紹介されるジム</h2>
+
+      <div class="gym-card">
+        <strong>ゴールドジム</strong>
+        初心者からプロまで対応、シャワー・サウナ完備。
+      </div>
+
+      <div class="gym-card">
+        <strong>エニタイムフィットネス</strong>
+        24時間営業で通いやすい！女性専用エリア・セキュリティも充実。
+      </div>
+
+      <div class="gym-card">
+        <strong>ティップネス</strong>
+        スタジオ・プールも充実。プログラム豊富で家族でも通える人気施設。
+      </div>
+
+      <div class="gym-card">
+        <strong>JOYFIT24</strong>
+        希望者に初回のオリエンテーションやカウンセリングあり。
+      </div>
+
+      <div class="gym-card">
+        <strong>FIT PLACE24</strong>
+        某有名YouTuber制作　とても安価で高品質の器具も充実。
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function importGymsFromCurrentLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+
+          const opinionArea = document.getElementById("opinion-area");
+          const opinionText = document.getElementById("opinion-text");
+
+          opinionText.textContent = `現在地（${lat.toFixed(4)}, ${lng.toFixed(4)}）付近には良さそうなジムがいくつかありそうですね！高評価のジムをチェックしてみてください。`;
+          opinionArea.style.display = "block";
+
+          setTimeout(() => {
+            const query = encodeURIComponent(`近くのジム ${lat},${lng}`);
+            const url = `https://www.google.com/search?q=${query}`;
+            window.open(url, "_blank");
+          }, 2000);
+
+        }, function (error) {
+          alert("位置情報の取得に失敗しました：" + error.message);
+        });
+      } else {
+        alert("このブラウザでは位置情報が使用できません。");
+      }
+    }
+  </script>
+
+</body>
+</html>
