@@ -64,7 +64,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: test_db
+          POSTGRES_DB: fitnes_man_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -87,7 +87,9 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
+          DATABASE_HOST: db
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: password
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
