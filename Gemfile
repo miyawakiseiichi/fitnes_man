@@ -16,9 +16,9 @@ gem "tailwindcss-rails"
 
 gem "pg_search"
 
-gem 'geocoder'
+gem "geocoder"
 
-gem 'dotenv-rails'
+gem "dotenv-rails"
 
 ruby "3.2.2"
 

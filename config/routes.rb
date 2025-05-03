@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
   resources :plans, only: [ :index, :show ]
   resources :sessions, only: [ :new, :create, :destroy ]
-  resources :gyms, only: [:index, :new, :create] do
+  resources :gyms, only: [ :index, :new, :create ] do
     collection do
       get :import_from_google
     end
