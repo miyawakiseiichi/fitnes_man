@@ -2,7 +2,7 @@ class GymsController < ApplicationController
   before_action :authenticate_user! # ユーザー認証が必要
   def index
     if params[:latitude].present? && params[:longitude].present?
-      @gyms = Gym.near([params[:latitude], params[:longitude]], 10, units: :km)
+      @gyms = Gym.near([ params[:latitude], params[:longitude] ], 10, units: :km)
     else
       @gyms = Gym.all
     end
