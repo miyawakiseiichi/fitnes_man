@@ -1,14 +1,16 @@
 class ContactsController < ApplicationController
-  before_action :authenticate_user! # ユーザー認証が必要
   def new
     @contact = Contact.new
   end
 
   def create
     @contact = Contact.new(contact_params)
-    @contact.save
+    if @contact.save
       ContactMailer.send_contact(@contact).deliver_later
       redirect_to thank_you_contacts_path
+    else
+      render :new
+    end
   end
 
   def thank_you

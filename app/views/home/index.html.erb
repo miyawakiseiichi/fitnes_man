@@ -71,6 +71,9 @@
 
   <!-- フッター -->
   <footer class="text-center py-8 border-t text-gray-500">
-    <%= link_to "お問い合わせ (入力) ページ", contact_path, class: "text-gray-700 hover:text-blue-600" %>
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <%= link_to "お問い合わせ (入力) ページ", contact_path, class: "text-gray-700 hover:text-blue-600" %>
+      <%= link_to "プライバシーポリシー", privacy_policy_path, class: "text-gray-700 hover:text-blue-600" %>
+    </div>
   </footer>
 </div>
