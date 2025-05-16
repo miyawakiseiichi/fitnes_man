@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "privacy_policies/show"
   devise_for :users, controllers: { registrations: "registrations" }
 
   root "home#index"
@@ -16,10 +17,20 @@ Rails.application.routes.draw do
       get :import_from_google
     end
   end
-  resources :tasks
+  resources :tasks do
+    member do
+      patch :complete
+      delete :destroy
+    end
+  end
   resources :supplements
   resources :proteins
   resources :weekly_menus, only: [ :index, :show ]
+
+  get '/auth/google', to: 'google_oauth#authorize'
+  get '/oauth2callback', to: 'google_oauth#callback'
+  get 'privacy_policy', to: 'privacy_policies#show', as: 'privacy_policy'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
