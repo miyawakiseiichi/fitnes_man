@@ -6,11 +6,14 @@ set -o errexit
 bundle install
 yarn install
 
-# フロントエンドのビルド
-yarn build  # JavaScriptをesbuildでバンドル（必要に応じて変更）
+# フロントエンドのビルド（必要に応じて）
+yarn build
 
 # アセットのプリコンパイル
-bundle exec rake assets:precompile  # CSSをSprocketsでコンパイル
+bundle exec rake assets:precompile
 
-# ridgepole を使わない場合
+# ★ 本番用マイグレーションをここで実行（重要！）
+bundle exec rails db:migrate
+
+# データの初期投入（任意）
 bundle exec rails db:seed
