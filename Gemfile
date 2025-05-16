@@ -18,8 +18,6 @@ gem "pg_search"
 
 gem "geocoder"
 
-gem 'google-api-client', '~> 0.53.0'
-
 gem "dotenv-rails"
 
 ruby "3.2.2"
