@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :tasks, dependent: :destroy
   has_many :plans, dependent: :destroy
   belongs_to :plan, optional: true
   belongs_to :frequency
