@@ -37,5 +37,6 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 .DS_Store
+config/google/credentials.json
 config/client_secret_*.json
 .env
