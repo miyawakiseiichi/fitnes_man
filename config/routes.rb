@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "privacy_policies/show"
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: { registrations: "registrations", sessions: "sessions", omniauth_callbacks: "users/omniauth_callbacks" }
 
   root "home#index"
 
@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     get "thank_you", on: :collection  # /contacts/thank_you を定義
   end
   resources :plans, only: [ :index, :show ]
-  resources :sessions, only: [ :new, :create, :destroy ]
   resources :gyms, only: [ :index, :new, :create ] do
     collection do
       get :import_from_google

@@ -23,6 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
+    session.delete(:prefill_email) # 👈セッションから削除
     mypage_path  # 新規登録後のリダイレクト先をマイページに
   end
 end

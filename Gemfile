@@ -20,6 +20,10 @@ gem "geocoder"
 
 gem "dotenv-rails"
 
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 ruby "3.2.2"
 
 gem "pg"

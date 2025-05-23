@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   # ✅ ログイン後のリダイレクト先をマイページに設定
   def after_sign_in_path_for(resource)
     puts "🔥 after_sign_in_path_for called: Redirecting to mypage_path" # 確認用ログ
+    session.delete(:prefill_email) # 👈セッションから削除
     mypage_path
   end
 

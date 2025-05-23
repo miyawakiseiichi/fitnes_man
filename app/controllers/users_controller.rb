@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_user, only: [ :edit, :update, :destroy ]  # ❌ show を削除
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id  # ログイン状態にする
+      sign_in(@user)  # Devise を使って自動ログイン
       redirect_to mypage_path, notice: "ユーザー登録が完了しました！"
     else
       flash.now[:alert] = @user.errors.full_messages.join("、")
@@ -18,8 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    render "users/show"
+    # @user = current_user → set_user で取得済み
   end
 
   def edit
@@ -35,13 +34,17 @@ class UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    reset_session  # ログアウト
+    sign_out(@user)  # Deviseのセッションも削除
     redirect_to root_path, notice: "アカウントが削除されました"
   end
 
   private
 
+  def set_user
+    @user = current_user
+  end
+
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 end

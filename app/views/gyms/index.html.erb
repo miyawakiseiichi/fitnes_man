@@ -2,158 +2,62 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>現在地からジム検索</title>
-  <style>
-    body {
-      font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
-      background-color: #f0f2f5;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    .location-button {
-      background-color: #4285F4;
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-      transition: all 0.3s ease;
-      display: block;
-      margin: 30px auto;
-    }
-
-    .location-button:hover {
-      background-color: #3367D6;
-    }
-
-    .location-button:active {
-      background-color: #2A56C6;
-      transform: scale(0.97);
-    }
-
-    section {
-      background-color: #ffffff;
-      padding: 24px;
-      border-radius: 12px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    #pre-description {
-      margin-top: 40px;
-      border-left: 6px solid #4285F4;
-    }
-
-    #gym-description {
-      border-left: 6px solid #34A853;
-    }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 12px;
-      font-size: 20px;
-      color: #222;
-    }
-
-    .gym-card {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 16px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      border-left: 4px solid #fbbc05;
-    }
-
-    .gym-card strong {
-      font-size: 17px;
-      display: block;
-      margin-bottom: 6px;
-      color: #333;
-    }
-
-    #opinion-area {
-      display: none;
-      margin-top: 30px;
-      padding: 16px;
-      border-radius: 8px;
-      background-color: #fff3cd;
-      color: #856404;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-2xl font-bold text-center mb-6">📍 現在地からジムを検索</h1>
 
-  <div class="container">
-    <!-- 🔰 事前説明 -->
-    <section id="pre-description">
-      <h2>💡 このページでできること</h2>
-      <p>
-        「📍現在地からジムを検索」ボタンを押すと、あなたの現在地を取得し、<strong>近くにあるジムをGoogleで自動検索</strong>します。<br>
-        高評価のジムがすぐに見つかるかもしれません！ぜひ活用してください。
-      </p>
-    </section>
+    <!-- ✅ ページ説明 -->
+    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded mb-8">
+      <h2 class="text-lg font-semibold text-blue-700 mb-2">このページでできること</h2>
+      <ul class="list-disc list-inside text-gray-700 space-y-1 text-sm">
+        <li><strong>現在地を取得</strong>し、近くのジムをGoogleで検索します。</li>
+        <li><strong>高評価のジム</strong>がすぐに見つかる可能性があります。</li>
+        <li>初心者にも使いやすいページ構成です。</li>
+      </ul>
+    </div>
 
-    <!-- ボタン -->
-    <button class="location-button" onclick="importGymsFromCurrentLocation()">
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow mb-6 mx-auto block" onclick="importGymsFromCurrentLocation()">
       📍 現在地からジムを検索
     </button>
 
-    <!-- 意見表示 -->
-    <div id="opinion-area">
+    <div id="opinion-area" class="hidden bg-yellow-100 text-yellow-800 p-4 rounded shadow mb-6">
       <p id="opinion-text"></p>
     </div>
 
-    <!-- ジム説明 -->
-    <section id="gym-description">
-      <h2>🏋️‍♀️ ジム情報について</h2>
-      <p>
-        このページでは、あなたの現在地に基づいて周辺のジムを検索できます。<br>
-        例えば、Googleマップで評価の高いジムや、距離が近い順に候補が見つかります。<br>
-        検索後、ジムの名前・住所・評価（★）が表示されるので、<strong>通いやすい場所・目的に合った施設</strong>を見つけましょう！
-      </p>
-    </section>
+    <!-- ✅ ジムの特徴説明 -->
+    <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded mb-8">
+      <h2 class="text-lg font-semibold text-green-700 mb-2">ジム情報について</h2>
+      <p class="text-sm text-gray-700">現在地から、Google検索で近隣のジムを確認できます。距離・評価・施設の特徴などから自分に合ったジムを見つけましょう。</p>
+    </div>
 
-    <!-- よく紹介されるジム -->
-    <section id="predefined-gyms">
-      <h2>🏋️‍♂️ よく紹介されるジム</h2>
-
-      <div class="gym-card">
-        <strong>ゴールドジム</strong>
+    <!-- ✅ 人気ジムリスト -->
+    <div class="space-y-4">
+      <h2 class="text-lg font-semibold text-yellow-600 border-b pb-2">🏋️‍♂️ よく紹介されるジム</h2>
+      <div class="p-4 border-l-4 border-yellow-400 bg-white rounded shadow">
+        <strong class="text-base font-semibold block">ゴールドジム</strong>
         初心者からプロまで対応、シャワー・サウナ完備。
       </div>
-
-      <div class="gym-card">
-        <strong>エニタイムフィットネス</strong>
+      <div class="p-4 border-l-4 border-yellow-400 bg-white rounded shadow">
+        <strong class="text-base font-semibold block">エニタイムフィットネス</strong>
         24時間営業で通いやすい！女性専用エリア・セキュリティも充実。
       </div>
-
-      <div class="gym-card">
-        <strong>ティップネス</strong>
+      <div class="p-4 border-l-4 border-yellow-400 bg-white rounded shadow">
+        <strong class="text-base font-semibold block">ティップネス</strong>
         スタジオ・プールも充実。プログラム豊富で家族でも通える人気施設。
       </div>
-
-      <div class="gym-card">
-        <strong>JOYFIT24</strong>
+      <div class="p-4 border-l-4 border-yellow-400 bg-white rounded shadow">
+        <strong class="text-base font-semibold block">JOYFIT24</strong>
         希望者に初回のオリエンテーションやカウンセリングあり。
       </div>
-
-      <div class="gym-card">
-        <strong>FIT PLACE24</strong>
+      <div class="p-4 border-l-4 border-yellow-400 bg-white rounded shadow">
+        <strong class="text-base font-semibold block">FIT PLACE24</strong>
         某有名YouTuber制作　とても安価で高品質の器具も充実。
       </div>
-    </section>
+    </div>
   </div>
 
   <script>
@@ -167,14 +71,13 @@
           const opinionText = document.getElementById("opinion-text");
 
           opinionText.textContent = `現在地（${lat.toFixed(4)}, ${lng.toFixed(4)}）付近には良さそうなジムがいくつかありそうですね！高評価のジムをチェックしてみてください。`;
-          opinionArea.style.display = "block";
+          opinionArea.classList.remove("hidden");
 
           setTimeout(() => {
             const query = encodeURIComponent(`近くのジム ${lat},${lng}`);
             const url = `https://www.google.com/search?q=${query}`;
             window.open(url, "_blank");
           }, 2000);
-
         }, function (error) {
           alert("位置情報の取得に失敗しました：" + error.message);
         });
