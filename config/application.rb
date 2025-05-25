@@ -25,10 +25,6 @@ module FitnesMan
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.hosts << "fitnes_man_app.onrender.com"  # Render で発行されるURLを追加
     config.autoload_paths += %W[#{config.root}/app/services]
-
-    # ホストを許可する設定
-    config.hosts << ".onrender.com"
   end
 end

@@ -1,22 +1,21 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.hosts << "fitnes-man.onrender.com"
+  config.hosts.clear
   config.hosts << "fitnes-man-production.onrender.com"
-  config.hosts << "fitnes-man-staging.onrender.com"
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: "380keyseiichi@gmail.com", # 自分のドメイン名 (ない場合はGmailのドメインでも可)
+    domain: "fitnes-man-production.onrender.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: ENV["SMTP_USERNAME"],  # 環境変数で設定
-    password: ENV["SMTP_PASSWORD"]    # 環境変数で設定
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"]
   }
-  config.action_mailer.default_url_options = { host: "fitnes-man-production.onrender.com" }  # RenderのアプリURL
+  config.action_mailer.default_url_options = { host: "fitnes-man-production.onrender.com", protocol: 'https' }
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
