@@ -73,6 +73,13 @@
       margin-bottom: 16px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       border-left: 4px solid #fbbc05;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gym-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     .gym-card strong {
@@ -129,27 +136,27 @@
     <section id="predefined-gyms">
       <h2>🏋️‍♂️ よく紹介されるジム</h2>
 
-      <div class="gym-card">
+      <div class="gym-card" onclick="window.open('https://www.goldsgym.jp/', '_blank')">
         <strong>ゴールドジム</strong>
         初心者からプロまで対応、シャワー・サウナ完備。
       </div>
 
-      <div class="gym-card">
+      <div class="gym-card" onclick="window.open('https://www.anytimefitness.co.jp/', '_blank')">
         <strong>エニタイムフィットネス</strong>
         24時間営業で通いやすい！女性専用エリア・セキュリティも充実。
       </div>
 
-      <div class="gym-card">
+      <div class="gym-card" onclick="window.open('https://www.tipness.co.jp/', '_blank')">
         <strong>ティップネス</strong>
         スタジオ・プールも充実。プログラム豊富で家族でも通える人気施設。
       </div>
 
-      <div class="gym-card">
+      <div class="gym-card" onclick="window.open('https://joyfit.jp/', '_blank')">
         <strong>JOYFIT24</strong>
         希望者に初回のオリエンテーションやカウンセリングあり。
       </div>
 
-      <div class="gym-card">
+      <div class="gym-card" onclick="window.open('https://www.fitplace24.com/', '_blank')">
         <strong>FIT PLACE24</strong>
         某有名YouTuber制作　とても安価で高品質の器具も充実。
       </div>

@@ -23,10 +23,22 @@
         <%= f.submit "ログイン", class: "w-full bg-gray-800 text-white font-bold py-3 rounded-lg hover:bg-gray-900 transition" %>
       </div>
     <% end %>
+
+    <!-- Googleログインボタン -->
+    <%= button_to user_google_oauth2_omniauth_authorize_path, 
+      method: :post, 
+      data: { turbo: false }, 
+      class: "mt-4 w-full flex items-center justify-center bg-white border border-gray-300 rounded-lg px-4 py-3 hover:bg-gray-50 transition" do %>
+      <img src="https://www.google.com/favicon.ico" alt="Google" class="w-5 h-5 mr-2">
+      <span class="text-gray-700 font-medium">Googleでログイン</span>
+    <% end %>
   </div>
 
   <!-- フッターリンク -->
-  <div class="text-center mt-6 text-gray-500">
-    <%= link_to "会員登録", new_user_registration_path, class: "text-gray-700 hover:underline" %>
-  </div>
+  <footer class="text-center py-8 border-t text-gray-500">
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      <%= link_to "お問い合わせ (入力) ページ", contact_path, class: "text-gray-700 hover:text-blue-600" %>
+      <%= link_to "プライバシーポリシー", privacy_policy_path, class: "text-gray-700 hover:text-blue-600" %>
+    </div>
+  </footer>
 </div>

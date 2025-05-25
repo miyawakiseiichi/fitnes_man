@@ -18,6 +18,12 @@
         <%= f.text_area :message, class: "w-full p-3 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 h-40" %>
       </div>
 
+      <div class="flex items-center justify-between mb-6">
+        <div class="text-sm text-gray-600">
+          <%= link_to "プライバシーポリシー", privacy_policy_path, class: "text-gray-700 hover:text-blue-600" %>
+        </div>
+      </div>
+
       <div class="text-center">
         <%= f.submit "送信", class: "bg-gray-500 text-white py-3 px-8 rounded-md text-lg font-semibold hover:bg-gray-600 transition" %>
       </div>

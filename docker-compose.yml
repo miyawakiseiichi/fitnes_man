@@ -33,6 +33,7 @@ services:
       DATABASE_HOST: db
       DATABASE_PORT: 5432
       RAILS_MAX_THREADS: 20
+      GOOGLE_REDIRECT_URI: http://localhost:3000/users/auth/google_oauth2/callback
     ports:
       - "${PORT:-3000}:3000"
     depends_on:

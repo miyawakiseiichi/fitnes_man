@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_16_232300) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_25_160519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,16 +47,28 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_16_232300) do
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
+  create_table "proteins", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "brand"
+    t.integer "price"
+    t.float "protein_content"
+    t.integer "weight"
+    t.string "flavor"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "completed"
-    t.boolean "custom"
     t.integer "reps"
     t.integer "sets"
+    t.boolean "custom"
+    t.boolean "completed"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -73,6 +85,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_16_232300) do
     t.integer "frequency_id", default: 4, null: false
     t.string "plan_type"
     t.integer "plan_id"
+    t.string "remember_digest"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
