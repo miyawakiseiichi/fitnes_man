@@ -271,15 +271,9 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  
-  # CSRF保護の設定
-  OmniAuth.config.allowed_request_methods = [:post, :get]
-  OmniAuth.config.silence_get_warning = true
-  OmniAuth.config.path_prefix = '/users/auth'
-
   config.omniauth :google_oauth2,
-    ENV['GOOGLE_OAUTH_CLIENT_ID'],
-    ENV['GOOGLE_OAUTH_CLIENT_SECRET'],
+    ENV['GOOGLE_CLIENT_ID'],
+    ENV['GOOGLE_CLIENT_SECRET'],
     {
       scope: 'email,profile',
       prompt: 'select_account',

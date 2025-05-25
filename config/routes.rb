@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   get "privacy_policies/show"
-  devise_for :users, controllers: { registrations: "registrations" }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'registrations'
+  }
+
+  # OmniAuthのコールバックルートを明示的に定義
+  devise_scope :user do
+    get 'users/auth/google_oauth2/callback' => 'users/omniauth_callbacks#google_oauth2'
+  end
 
   root "home#index"
 
