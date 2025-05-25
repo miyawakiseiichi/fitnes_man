@@ -5,31 +5,31 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     Rails.logger.info "Request env: #{request.env['omniauth.auth'].to_json}" if request.env['omniauth.auth']
 
     begin
-      @user = User.from_omniauth(request.env['omniauth.auth'])
+      auth = request.env['omniauth.auth']
+      # まず、既存のユーザーを検索
+      @user = User.find_by(email: auth.info.email)
       
-      Rails.logger.info "User object: #{@user.inspect}"
-
-      if @user.persisted?
+      if @user
         # 既存ユーザーの場合
-        if @user.provider.present? && @user.uid.present?
-          Rails.logger.info "User successfully authenticated and linked with Google"
-          flash[:notice] = 'Googleアカウントと連携しました'
-        else
-          Rails.logger.info "User successfully authenticated"
-          flash[:notice] = 'ログインしました'
-        end
+        @user.update(
+          provider: auth.provider,
+          uid: auth.uid,
+          name: auth.info.name
+        )
+        flash[:notice] = 'ログインしました'
         sign_in_and_redirect @user, event: :authentication
       else
         # 新規ユーザーの場合、セッションにGoogle認証情報を保存して登録画面へ
         Rails.logger.info "New user registration required"
         session["devise.google_data"] = {
-          email: @user.email,
-          name: @user.name,
-          username: @user.username,
-          provider: @user.provider,
-          uid: @user.uid
+          email: auth.info.email,
+          name: auth.info.name,
+          username: auth.info.email.split('@').first,
+          provider: auth.provider,
+          uid: auth.uid
         }
-        redirect_to new_user_registration_url, notice: 'アカウント情報を入力して登録を完了してください'
+        flash[:notice] = 'アカウント情報を入力して登録を完了してください'
+        redirect_to new_user_registration_path
       end
     rescue => e
       Rails.logger.error "Error in google_oauth2 callback: #{e.message}\n#{e.backtrace.join("\n")}"

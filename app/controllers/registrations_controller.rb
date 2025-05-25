@@ -1,10 +1,13 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: [:create]
+
   def new
-    super
-    if session["devise.google_data"].present?
-      @user.email = session["devise.google_data"]["email"]
-      @user.name = session["devise.google_data"]["name"]
-      @user.username = session["devise.google_data"]["username"]
+    super do |resource|
+      if session["devise.google_data"].present?
+        resource.email = session["devise.google_data"]["email"]
+        resource.name = session["devise.google_data"]["name"]
+        resource.username = session["devise.google_data"]["username"]
+      end
     end
   end
 
@@ -32,15 +35,12 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def set_plans
-    @plans = Plan.all
-  end
-
-  def sign_up_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :plan_id, :frequency_id, :name)
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :name, :frequency_id, :plan_id])
   end
 
   def after_sign_up_path_for(resource)
-    mypage_path  # 新規登録後のリダイレクト先をマイページに
+    session["devise.google_data"] = nil
+    root_path
   end
 end
