@@ -9,9 +9,18 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       image_size: 50,
       access_type: 'online',
       name: 'google',
-      redirect_uri: ENV['GOOGLE_REDIRECT_URI'],  # /callbackは環境変数に含める
+      redirect_uri: ENV['GOOGLE_REDIRECT_URI'],
       origin_param: 'return_to',
-      ssl: { verify: !Rails.env.development? }  # 開発環境ではSSL検証をスキップ
+      ssl: { verify: !Rails.env.development? },
+      authorized_domains: ['fitnes-man-production.onrender.com'],
+      hd: 'fitnes-man-production.onrender.com',
+      setup: (lambda do |env|
+        if Rails.env.production?
+          env['omniauth.strategy'].options[:client_options].site = 'https://accounts.google.com'
+          env['omniauth.strategy'].options[:client_options].authorize_url = 'https://accounts.google.com/o/oauth2/auth'
+          env['omniauth.strategy'].options[:client_options].token_url = 'https://accounts.google.com/o/oauth2/token'
+        end
+      end)
     }
 end
 
