@@ -24,9 +24,47 @@
       margin: auto;
     }
 
+    .search-form {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      justify-content: center;
+    }
+
+    .search-input {
+      flex: 1;
+      max-width: 500px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .search-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .search-button:hover {
+      background-color: #0056b3;
+    }
+
+    .search-note {
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      margin: 5px 0 0;
+    }
+
     h1 {
       font-size: 24px;
       text-align: center;
+      margin-top: 0;
     }
 
     .product-grid {
@@ -52,6 +90,7 @@
 
     .product-box:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
     }
 
     .product-box img {
@@ -80,47 +119,141 @@
       margin-top: 8px;
       color: #000;
     }
+
+    .guide-section {
+      max-width: 850px;
+      margin: 25px auto;
+      background: #ffffff;
+      padding: 32px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .guide-section h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 22px;
+      color: #333;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .guide-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background-color: #007bff;
+    }
+
+    .guide-section ul {
+      line-height: 1.9;
+      font-size: 15.5px;
+      color: #333;
+      padding-left: 28px;
+      margin: 0;
+    }
+
+    .guide-section li {
+      margin-bottom: 17px;
+      padding-left: 5px;
+    }
+
+    .guide-section strong {
+      color: #007bff;
+      font-size: 16.5px;
+      display: inline-block;
+      margin-bottom: 3px;
+    }
+
+    .info-banner {
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 800px;
+      text-align: center;
+      color: #495057;
+      font-size: 15px;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .info-banner i {
+      color: #007bff;
+      font-size: 20px;
+    }
+
+    .info-banner span {
+      flex: 1;
+    }
   </style>
 </head>
 <body>
 
 <header>
   <div class="search-container">
-    <h1>筋トレ用サプリメントを検索する</h1>
-    <script async src="https://cse.google.com/cse.js?cx=01c64f9fe09e641d3"></script>
-    <div class="gcse-search"></div>
+    <h1>筋トレサプリ検索＆おすすめ一覧</h1>
+    <form action="https://www.google.com/search" method="get" target="_blank" class="search-form">
+      <input type="hidden" name="q" value="サプリメント">
+      <input type="text" name="q" class="search-input" placeholder="他のサプリメントを探す（Google検索）">
+      <button type="submit" class="search-button">検索</button>
+    </form>
+    <p class="search-note">※ 検索時に自動的に「サプリメント」というワードが追加されます<br>（例：「クレアチン」と入力 →「サプリメント クレアチン」で検索）</p>
   </div>
 </header>
 
 <main>
+  <div class="info-banner">
+    <i>ℹ️</i>商品画像をクリックすると、Amazonの人気ランキングが開きます。価格は変動する場合があります。
+  </div>
+
+  <section class="guide-section">
+    <h2>筋トレサプリの選び方</h2>
+    <ul>
+      <li><strong>クレアチン：</strong>最大筋力UP、瞬発系トレーニング向け。摂取タイミングは運動後または1日1回空腹時。</li>
+      <li><strong>BCAA・EAA：</strong>筋肉分解防止やリカバリーサポートに。トレーニング中または直前・直後に摂取。</li>
+      <li><strong>HMB：</strong>筋肥大を促進したい初心者にも人気。起床後・トレーニング前・就寝前に摂取。</li>
+      <li><strong>マルチビタミン：</strong>栄養バランスを補う目的で毎日摂取。朝食後や夕食後など、毎日同じ時間帯に摂取。</li>
+    </ul>
+  </section>
+
   <div class="product-grid">
-    <!-- サプリ例 -->
+    <!-- クレアチン -->
     <div class="product-box" onclick="location.href= 'https://www.amazon.co.jp/gp/bestsellers/hpc/3457022051';">
       <img src="<%= asset_path('creatine.jpg') %>" alt="クレアチン">
       <div class="product-name">クレアチン モノハイドレート</div>
       <div class="product-desc">
         クレアチンは瞬発力や筋力アップを目的としたサプリで、パワー系トレーニングを行う方に人気です。水と一緒に飲むだけで効果を発揮しやすく、摂取のタイミングも自由度が高いのが特徴です。
-        <br><strong>摂取タイミング：</strong>運動後または1日1回空腹時に。
+        <strong>摂取タイミング：</strong>運動後または1日1回空腹時に。
       </div>
     </div>
+
     <!-- BCAA・EAA -->
-      <div class="product-box" onclick="location.href='https://www.amazon.co.jp/gp/bestsellers/hpc/3457012051';">
-        <img src="<%= asset_path('eaa.jpg') %>" alt="BCAA・EAA">
-        <div class="product-name">BCAA・EAA（必須アミノ酸）</div>
-        <div class="product-desc">
-          BCAA（バリン・ロイシン・イソロイシン）は筋肉のエネルギー源として重要で、トレーニング中の筋分解抑制に役立ちます。<br>
-          EAAはBCAAを含む9種類の必須アミノ酸を配合しており、より総合的に筋肉合成を促進する効果が期待できます。<br>
-          筋肉の修復と成長をサポートしたい方におすすめです。
-          <br><strong>摂取タイミング：</strong>トレーニング中または直前・直後に。
-        </div>
+    <div class="product-box" onclick="location.href='https://www.amazon.co.jp/gp/bestsellers/hpc/3457012051';">
+      <img src="<%= asset_path('eaa.jpg') %>" alt="BCAA・EAA">
+      <div class="product-name">BCAA・EAA（必須アミノ酸）</div>
+      <div class="product-desc">
+        BCAA（バリン・ロイシン・イソロイシン）は筋肉のエネルギー源として重要で、トレーニング中の筋分解抑制に役立ちます。
+        EAAはBCAAを含む9種類の必須アミノ酸を配合しており、より総合的に筋肉合成を促進する効果が期待できます。
+        <strong>摂取タイミング：</strong>トレーニング中または直前・直後に。
       </div>
+    </div>
+
     <!-- HMB -->
     <div class="product-box" onclick="location.href='https://www.amazon.co.jp/gp/bestsellers/hpc/6432787051';">
       <img src="<%= asset_path('hmb.jpg') %>" alt="HMB">
       <div class="product-name">HMB（β-ヒドロキシ-β-メチル酪酸）</div>
       <div class="product-desc">
         HMBは筋肉の分解を抑えつつ筋肉量の増加をサポートするサプリで、初心者の筋トレ継続や減量中のサポートとしても人気です。筋肥大を効率よく進めたい方におすすめ。
-        <br><strong>摂取タイミング：</strong>起床後・トレーニング前・就寝前が効果的。
+        <strong>摂取タイミング：</strong>起床後・トレーニング前・就寝前が効果的。
       </div>
     </div>
 
@@ -130,20 +263,10 @@
       <div class="product-name">マルチビタミン</div>
       <div class="product-desc">
         健康維持や栄養バランスを整えるために毎日摂取したいサプリ。トレーニングを継続するための土台作りや、食事だけでは不足しがちな微量栄養素を補います。
-        <br><strong>摂取タイミング：</strong>朝食後や夕食後など毎日同じ時間に。
+        <strong>摂取タイミング：</strong>朝食後や夕食後など毎日同じ時間に。
       </div>
     </div>
   </div>
-
-  <section style="max-width: 800px; margin: 40px auto; background: #fff; padding: 20px; border-radius: 10px;">
-    <h2 style="text-align: center;">筋トレサプリの選び方</h2>
-    <ul style="line-height: 1.8; font-size: 14px;">
-      <li><strong>クレアチン：</strong>最大筋力UP、瞬発系トレーニング向け。</li>
-      <li><strong>BCAA・EAA：</strong>筋肉分解防止やリカバリーサポートに。</li>
-      <li><strong>HMB：</strong>筋肥大を促進したい初心者にも人気。</li>
-      <li><strong>マルチビタミン：</strong>栄養バランスを補う目的で毎日摂取。</li>
-    </ul>
-  </section>
 </main>
 
 </body>
