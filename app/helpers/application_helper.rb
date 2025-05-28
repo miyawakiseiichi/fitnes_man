@@ -35,8 +35,8 @@ module ApplicationHelper
 
   def full_url_for_image(image_name)
     if Rails.env.production?
-      host = ENV['ASSET_HOST'] || 'https://fitnes-man.com'
-      "#{host}#{ActionController::Base.helpers.asset_path(image_name)}"
+      host = ENV['ASSET_HOST'] || 'https://fitnes-man-production.onrender.com'
+      "#{host}#{compute_asset_path(image_name)}"
     else
       asset_url(image_name, host: request.base_url)
     end
