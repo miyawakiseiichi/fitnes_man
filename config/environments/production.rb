@@ -2,6 +2,8 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   config.hosts.clear
+  config.hosts << "fitnes-man.com"
+  config.hosts << "www.fitnes-man.com"
   config.hosts << "fitnes-man-production.onrender.com"
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -9,13 +11,13 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: "fitnes-man-production.onrender.com",
+    domain: "fitnes-man.com",
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: ENV["SMTP_USERNAME"],
     password: ENV["SMTP_PASSWORD"]
   }
-  config.action_mailer.default_url_options = { host: "fitnes-man-production.onrender.com", protocol: 'https' }
+  config.action_mailer.default_url_options = { host: "fitnes-man.com", protocol: 'https' }
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
@@ -44,7 +46,7 @@ Rails.application.configure do
   config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.asset_host = "http://assets.example.com"
+  config.asset_host = ENV['ASSET_HOST'] || 'https://fitnes-man.com'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
@@ -64,6 +66,12 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
+
+  # SSL証明書の設定
+  config.ssl_options = {
+    hsts: { subdomains: true, preload: true, expires: 1.year },
+    redirect: { exclude: ->(request) { request.path == "/up" } }
+  }
 
   # Skip http-to-https redirect for the default health check endpoint.
   # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
@@ -116,4 +124,8 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # アセットのSSL設定
+  config.force_ssl = true
+  config.action_controller.asset_host_protocol = :https
 end
