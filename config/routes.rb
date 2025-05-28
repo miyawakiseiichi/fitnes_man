@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   end
   resources :supplements
   resources :proteins
-  resources :weekly_menus, only: [ :index, :show ]
+  resources :weekly_menus
 
   get 'privacy_policy', to: 'privacy_policies#show', as: 'privacy_policy'
 

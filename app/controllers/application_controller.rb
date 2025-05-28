@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  require 'simple_calendar'
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
 
