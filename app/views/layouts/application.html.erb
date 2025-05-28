@@ -7,6 +7,20 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- OGP設定 -->
+    <meta property="og:title" content="FitnesMan - あなたのフィットネスをサポート">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= request.url %>">
+    <meta property="og:image" content="<%= image_url('ogp_default.jpg') %>">
+    <meta property="og:site_name" content="FitnesMan">
+    <meta property="og:description" content="FitnesManは、あなたのフィットネスライフをサポートするアプリです。トレーニング計画の作成、進捗管理、栄養管理など、フィットネスに必要な機能が揃っています。">
+    
+    <!-- Twitter Card設定 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FitnesMan - あなたのフィットネスをサポート">
+    <meta name="twitter:description" content="FitnesManは、あなたのフィットネスライフをサポートするアプリです。">
+    <meta name="twitter:image" content="<%= image_url('ogp_default.jpg') %>">
+
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
