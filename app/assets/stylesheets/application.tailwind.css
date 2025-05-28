@@ -21,3 +21,78 @@
 .hover\:bg-blue-100:hover {
   background-color: #ebf8ff;
 }
+
+/* Simple Calendar Customization */
+.simple-calendar {
+  @apply border border-gray-300 rounded-lg overflow-hidden bg-white;
+}
+
+.simple-calendar .calendar-title {
+  @apply text-2xl font-bold text-center py-4;
+}
+
+.simple-calendar .calendar-heading {
+  @apply flex items-center justify-between px-4 py-2 bg-gray-50;
+}
+
+.simple-calendar .calendar-heading a {
+  @apply text-gray-600 hover:text-gray-900;
+}
+
+.simple-calendar .calendar-heading .calendar-title {
+  @apply text-xl font-bold;
+}
+
+.simple-calendar .calendar-nav {
+  @apply flex items-center gap-2;
+}
+
+.simple-calendar .calendar-nav a {
+  @apply text-gray-400 hover:text-gray-600;
+}
+
+.simple-calendar .calendar-nav i {
+  @apply text-sm;
+}
+
+.simple-calendar .calendar-header {
+  @apply grid grid-cols-7 border-b border-gray-300;
+}
+
+.simple-calendar .calendar-header div {
+  @apply py-2 text-center text-sm font-medium text-gray-600;
+}
+
+.simple-calendar .calendar-body {
+  @apply grid grid-cols-7;
+}
+
+.simple-calendar .calendar-body .calendar-row {
+  @apply grid grid-cols-7;
+}
+
+.simple-calendar .calendar-body .calendar-day {
+  @apply min-h-[100px] border-b border-r border-gray-300 p-2;
+}
+
+.simple-calendar .calendar-body .calendar-day.today {
+  @apply bg-blue-50;
+}
+
+.simple-calendar .calendar-body .calendar-day.other-month {
+  @apply bg-gray-50;
+}
+
+.simple-calendar .calendar-body .calendar-day.weekend {
+  @apply bg-gray-50;
+}
+
+/* Scrollbar Customization */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

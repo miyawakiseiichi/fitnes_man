@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_25_160519) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_26_092128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_25_160519) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "supplements", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "brand"
+    t.integer "price"
+    t.string "category"
+    t.string "effects"
+    t.string "dosage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
@@ -85,9 +97,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_25_160519) do
     t.integer "frequency_id", default: 4, null: false
     t.string "plan_type"
     t.integer "plan_id"
-    t.string "remember_digest"
-    t.string "provider"
     t.string "uid"
+    t.string "provider"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -99,6 +110,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_25_160519) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "plan_id"
+    t.date "scheduled_date"
   end
 
   add_foreign_key "plans", "users"

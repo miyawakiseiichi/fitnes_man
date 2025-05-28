@@ -54,40 +54,42 @@ soft_plan = Plan.find_by!(title: "健康維持")
 diet_plan = Plan.find_by!(title: "ダイエット")
 advanced_plan = Plan.find_by!(title: "ゴリマッチョ")
 
+# 今週の月曜日から開始
+start_date = Date.today.beginning_of_week
+
 weekly_menus = [
   # 健康維持
-  { name: "月曜日", description: "軽いストレッチ・ウォーキング", plan_id: soft_plan&.id },
-  { name: "火曜日", description: "自重スクワット・プランク", plan_id: soft_plan&.id },
-  { name: "水曜日", description: "休息日", plan_id: soft_plan&.id },
-  { name: "木曜日", description: "休息日", plan_id: soft_plan&.id },
-  { name: "金曜日", description: "休息日", plan_id: soft_plan&.id },
-  { name: "土曜日", description: "休息日", plan_id: soft_plan&.id },
-  { name: "日曜日", description: "休息日", plan_id: soft_plan&.id },
+  { name: "月曜日", description: "軽いストレッチ・ウォーキング", plan_id: soft_plan&.id, scheduled_date: start_date },
+  { name: "火曜日", description: "自重スクワット・プランク", plan_id: soft_plan&.id, scheduled_date: start_date + 1.day },
+  { name: "水曜日", description: "休息日", plan_id: soft_plan&.id, scheduled_date: start_date + 2.days },
+  { name: "木曜日", description: "休息日", plan_id: soft_plan&.id, scheduled_date: start_date + 3.days },
+  { name: "金曜日", description: "休息日", plan_id: soft_plan&.id, scheduled_date: start_date + 4.days },
+  { name: "土曜日", description: "休息日", plan_id: soft_plan&.id, scheduled_date: start_date + 5.days },
+  { name: "日曜日", description: "休息日", plan_id: soft_plan&.id, scheduled_date: start_date + 6.days },
 
   # ダイエット
-  { name: "月曜日", description: "スクワット・ベンチプレス・デッドリフト", plan_id: diet_plan&.id },
-  { name: "火曜日", description: "ランニング・プランク・腹筋", plan_id: diet_plan&.id },
-  { name: "水曜日", description: "休息日", plan_id: diet_plan&.id },
-  { name: "木曜日", description: "休息日", plan_id: diet_plan&.id },
-  { name: "金曜日", description: "休息日", plan_id: diet_plan&.id },
-  { name: "土曜日", description: "休息日", plan_id: diet_plan&.id },
-  { name: "日曜日", description: "休息日", plan_id: diet_plan&.id },
-
+  { name: "月曜日", description: "スクワット・ベンチプレス・デッドリフト", plan_id: diet_plan&.id, scheduled_date: start_date },
+  { name: "火曜日", description: "ランニング・プランク・腹筋", plan_id: diet_plan&.id, scheduled_date: start_date + 1.day },
+  { name: "水曜日", description: "休息日", plan_id: diet_plan&.id, scheduled_date: start_date + 2.days },
+  { name: "木曜日", description: "休息日", plan_id: diet_plan&.id, scheduled_date: start_date + 3.days },
+  { name: "金曜日", description: "休息日", plan_id: diet_plan&.id, scheduled_date: start_date + 4.days },
+  { name: "土曜日", description: "休息日", plan_id: diet_plan&.id, scheduled_date: start_date + 5.days },
+  { name: "日曜日", description: "休息日", plan_id: diet_plan&.id, scheduled_date: start_date + 6.days },
 
   # ゴリマッチョ
-  { name: "月曜日", description: "ベンチプレス・インクラインベンチプレス・ディップス・ダンベルフライ", plan_id: advanced_plan&.id },
-  { name: "火曜日", description: "懸垂", plan_id: advanced_plan&.id },
-  { name: "水曜日", description: "レッグプレス", plan_id: advanced_plan&.id },
-  { name: "木曜日", description: "ショルダープレス", plan_id: advanced_plan&.id },
-  { name: "金曜日", description: "休息日", plan_id: advanced_plan&.id },
-  { name: "土曜日", description: "休息日", plan_id: advanced_plan&.id },
-  { name: "日曜日", description: "休息日", plan_id: advanced_plan&.id }
-
+  { name: "月曜日", description: "ベンチプレス・インクラインベンチプレス・ディップス・ダンベルフライ", plan_id: advanced_plan&.id, scheduled_date: start_date },
+  { name: "火曜日", description: "懸垂", plan_id: advanced_plan&.id, scheduled_date: start_date + 1.day },
+  { name: "水曜日", description: "レッグプレス", plan_id: advanced_plan&.id, scheduled_date: start_date + 2.days },
+  { name: "木曜日", description: "ショルダープレス", plan_id: advanced_plan&.id, scheduled_date: start_date + 3.days },
+  { name: "金曜日", description: "休息日", plan_id: advanced_plan&.id, scheduled_date: start_date + 4.days },
+  { name: "土曜日", description: "休息日", plan_id: advanced_plan&.id, scheduled_date: start_date + 5.days },
+  { name: "日曜日", description: "休息日", plan_id: advanced_plan&.id, scheduled_date: start_date + 6.days }
 ]
+
 weekly_menus.each do |menu|
   if menu[:plan_id].present?
     puts "✅ WeeklyMenu 作成: #{menu.inspect}"  # ✅ デバッグ用出力
-    WeeklyMenu.create!(menu.except(:plan_type))  # plan_type を除外
+    WeeklyMenu.create!(menu)
   else
     puts "❌ スキップ: plan_id が nil のため作成不可: #{menu.inspect}"
   end
