@@ -7,12 +7,15 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-Plan.destroy_all
+
+# 既存データを削除（依存関係を考慮した順序）
 WeeklyMenu.destroy_all
-Frequency.destroy_all
 User.destroy_all
+Plan.destroy_all
+Frequency.destroy_all
 Gym.destroy_all
 
+# 1. まずFrequencyを作成（他のテーブルから参照されるため）
 frequencies = [
   "週1回",
   "週2~3回",
@@ -24,32 +27,33 @@ frequencies.each do |name|
 end
 puts "✅ Frequency データ作成完了"
 
-plan = Plan.first || Plan.create!(name: "健康維持", title: "健康維持", description: "ライトなトレーニングプラン")
-
-user = User.find_or_initialize_by(email: "test@example.com")
-user.update!(
-  password: "password",  # Devise の `password` は `update!` で設定する
-  password_confirmation: "password",
-  name: "テストユーザー",
-  username: "testuser",
-  plan_id: plan.id,
-  frequency: Frequency.first
-)
-puts "✅ User: #{user.inspect}"  # ユーザーが正しく作成されているか確認
-
+# 2. Planを作成
 plans = [
-  { name: "健康維持", title: "健康維持", description: "ライトなトレーニングプラン", user_id: user.id },
-  { name: "ダイエット", title: "ダイエット", description: "バランスの取れたトレーニングプラン", user_id: user.id },
-  { name: "ゴリマッチョ", title: "ゴリマッチョ", description: "ハードトレーニングプラン", user_id: user.id }
+  { name: "健康維持", title: "健康維持", description: "ライトなトレーニングプラン" },
+  { name: "ダイエット", title: "ダイエット", description: "バランスの取れたトレーニングプラン" },
+  { name: "ゴリマッチョ", title: "ゴリマッチョ", description: "ハードトレーニングプラン" }
 ]
 plans.each do |plan_data|
-  Plan.find_or_create_by!(name: plan_data[:name]) do |plan|
-    plan.title = plan_data[:title]
-    plan.description = plan_data[:description]
-  end
+  Plan.create!(plan_data)
 end
 puts "✅ Plan データ作成完了"
 
+# 3. Userを作成
+first_plan = Plan.first
+first_frequency = Frequency.first
+
+user = User.create!(
+  email: "test@example.com",
+  password: "password",
+  password_confirmation: "password",
+  name: "テストユーザー",
+  username: "testuser",
+  plan_id: first_plan.id,
+  frequency_id: first_frequency.id
+)
+puts "✅ User: #{user.inspect}"
+
+# プランと頻度のオブジェクトを取得
 soft_plan = Plan.find_by!(title: "健康維持")
 diet_plan = Plan.find_by!(title: "ダイエット")
 advanced_plan = Plan.find_by!(title: "ゴリマッチョ")
@@ -146,10 +150,3 @@ weekly_menus.each do |menu|
   end
 end
 puts "✅ WeeklyMenu データ作成完了"
-
-plans.each do |plan_data|
-  Plan.find_or_create_by!(name: plan_data[:name]) do |plan|
-    plan.description = plan_data[:description]
-    plan.save!
-  end
-end
