@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [ :edit, :update, :destroy ]  # ❌ show を削除
+  before_action :set_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -18,18 +18,20 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    render "users/show"
   end
 
   def edit
+    @plans = Plan.all
+    @frequencies = Frequency.all
   end
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: "プロフィールが更新されました！"
+      redirect_to @user, notice: 'プロフィールが更新されました。'
     else
-      render :edit, status: :unprocessable_entity
+      @plans = Plan.all
+      @frequencies = Frequency.all
+      render :edit
     end
   end
 
@@ -41,7 +43,11 @@ class UsersController < ApplicationController
 
   private
 
+  def set_user
+    @user = current_user
+  end
+
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :username, :plan_id, :frequency_id)
   end
 end
