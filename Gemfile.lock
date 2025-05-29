@@ -78,7 +78,7 @@ GEM
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.4.0)
-    bigdecimal (3.1.9)
+    bigdecimal (3.2.0)
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
@@ -113,7 +113,7 @@ GEM
     dotenv-rails (3.1.8)
       dotenv (= 3.1.8)
       railties (>= 6.1)
-    drb (2.2.1)
+    drb (2.2.3)
     erubi (1.13.1)
     erubis (2.7.0)
     excon (1.2.5)
@@ -391,7 +391,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    shoulda-matchers (5.3.0)
+    shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
     simple_calendar (3.1.0)
       rails (>= 6.1)
@@ -491,7 +491,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0)
   rubocop-rails-omakase
   selenium-webdriver
-  shoulda-matchers (~> 5.0)
+  shoulda-matchers (~> 6.5)
   simple_calendar (~> 3.1)
   sprockets-rails
   stimulus-rails
