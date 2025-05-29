@@ -1,114 +1,128 @@
 <% require 'simple_calendar' %>
 
-<h1 class="text-3xl font-bold text-center mb-6">月間トレーニングメニュー</h1>
+<main class="flex-1 p-8">
+  <!-- ヘッダー -->
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">週次メニュー</h1>
+      <% if @plan && @frequency %>
+        <p class="text-lg text-gray-600 mt-2">
+          現在のプラン: <span class="font-semibold text-blue-600"><%= @plan.title %></span> | 
+          頻度: <span class="font-semibold text-green-600"><%= @frequency.name %></span>
+        </p>
+      <% end %>
+    </div>
+    <div class="flex space-x-4">
+      <%= link_to "プロフィール編集", edit_user_path(current_user), 
+          class: "bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors" %>
+    </div>
+  </div>
 
-<!-- プラン情報 -->
-<div class="text-center my-4">
-  <% @plan %>
-    <p class="text-lg font-semibold">現在のプラン: <%= @plan.name %></p>
-    <p class="text-gray-600"><%= @plan.description %></p>
-</div>
+  <!-- フラッシュメッセージ -->
+  <% if flash[:info] %>
+    <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-4">
+      <%= flash[:info] %>
+    </div>
+  <% end %>
+  
+  <% if flash[:warning] %>
+    <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-4">
+      <%= flash[:warning] %>
+    </div>
+  <% end %>
 
-<!-- 週単位カレンダー -->
-<div class="max-w-7xl mx-auto bg-white rounded-lg shadow overflow-hidden">
-  <!-- カレンダーヘッダー -->
-  <div class="flex items-center justify-between p-4 border-b">
-    <%= link_to weekly_menus_path(date: @date.prev_month), class: "p-2 hover:bg-gray-100 rounded" do %>
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-    <% end %>
+  <!-- カレンダーナビゲーション -->
+  <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-lg shadow">
+    <%= link_to "前月", weekly_menus_path(date: (@date - 1.month).strftime('%Y-%m-%d')), 
+        class: "bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors" %>
     
-    <h2 class="text-xl font-semibold">
-      <%= @date.strftime("%Y年%m月") %>
+    <h2 class="text-2xl font-bold text-gray-800">
+      <%= @date.strftime('%Y年%m月') %>
     </h2>
     
-    <%= link_to weekly_menus_path(date: @date.next_month), class: "p-2 hover:bg-gray-100 rounded" do %>
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-      </svg>
-    <% end %>
+    <%= link_to "次月", weekly_menus_path(date: (@date + 1.month).strftime('%Y-%m-%d')), 
+        class: "bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors" %>
   </div>
 
-  <!-- 曜日ヘッダー -->
-  <div class="grid grid-cols-7 border-b bg-gray-50">
-    <% %w[日 月 火 水 木 金 土].each_with_index do |wday, index| %>
-      <div class="py-3 text-center text-sm font-medium text-gray-700 border-r last:border-r-0
-        <%= 'text-red-500' if index == 0 %>
-        <%= 'text-blue-500' if index == 6 %>">
-        <%= wday %>
-      </div>
-    <% end %>
-  </div>
+  <!-- カレンダーグリッド -->
+  <div class="calendar-grid">
+    <!-- 日本語の曜日ヘッダー -->
+    <div class="grid grid-cols-7 gap-1 mb-4">
+      <% %w[日 月 火 水 木 金 土].each_with_index do |day, index| %>
+        <div class="text-center py-2 font-bold 
+          <%= index == 0 ? 'text-red-500' : '' %> 
+          <%= index == 6 ? 'text-blue-500' : '' %>
+          text-gray-700">
+          <%= day %>
+        </div>
+      <% end %>
+    </div>
 
-  <!-- カレンダー本体（週単位） -->
-  <div class="grid grid-cols-7 gap-0">
-    <% (@start_date..@end_date).each do |date| %>
-      <div class="min-h-[180px] border-r border-b border-gray-300 last:border-r-0 
-        <%= 'bg-blue-50' if date == Date.today %>
-        <%= 'bg-gray-50' if date.month != @date.month %>
-        <%= 'hover:bg-gray-100' if date.month == @date.month %>">
-        
-        <!-- 日付ヘッダー -->
-        <div class="p-2 border-b border-gray-200 bg-white">
-          <div class="flex items-center justify-between">
-            <div>
-              <% if date == Date.today %>
-                <div class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold">
-                  <%= date.day %>
-                </div>
-              <% else %>
-                <div class="text-lg font-semibold <%= date.month != @date.month ? 'text-gray-400' : date.wday == 0 ? 'text-red-500' : date.wday == 6 ? 'text-blue-500' : 'text-gray-700' %>">
-                  <%= date.day %>
-                </div>
-              <% end %>
-            </div>
-            <div class="text-xs text-gray-400">
-              <%= date.strftime("%m/%d") %>
+    <!-- カレンダーの日付セル -->
+    <div class="grid grid-cols-7 gap-1">
+      <% (@start_date..@end_date).each do |date| %>
+        <% is_today = date == Date.today %>
+        <% is_current_month = date.month == @date.month %>
+        <% is_sunday = date.wday == 0 %>
+        <% is_saturday = date.wday == 6 %>
+        <% day_menus = @menus_by_day&.dig(date.wday) || [] %>
+
+        <div class="min-h-[180px] border-r border-b border-gray-300 last:border-r-0 
+          <%= 'bg-blue-50' if is_today %>
+          <%= 'text-gray-400' unless is_current_month %>
+          <%= 'bg-red-50' if is_sunday && is_current_month %>
+          <%= 'bg-blue-50' if is_saturday && is_current_month %>
+          hover:bg-gray-100">
+          
+          <!-- 日付ヘッダー -->
+          <div class="p-2 border-b border-gray-200 bg-white">
+            <div class="flex items-center justify-between">
+              <div>
+                <% if is_today %>
+                  <div class="bg-blue-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold">
+                    <%= date.day %>
+                  </div>
+                <% else %>
+                  <div class="text-lg font-semibold 
+                    <%= is_sunday ? 'text-red-500' : '' %>
+                    <%= is_saturday ? 'text-blue-500' : '' %>
+                    <%= 'text-gray-700' if is_current_month && !is_sunday && !is_saturday %>">
+                    <%= date.day %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="text-xs text-gray-400">
+                <%= date.strftime('%m/%d') %>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- メニュー詳細表示 -->
-        <div class="p-2 space-y-2 h-full">
-          <% 
-            # その日の特定のメニュー
-            specific_menus = @weekly_menus.select { |m| m.scheduled_date == date }
-            # その曜日のプランメニュー
-            wday_menus = @plan_menus[date.wday] || []
-            # 表示するメニューを決定（特定の日のメニューがあればそれを、なければ曜日のメニューを表示）
-            display_menus = specific_menus.any? ? specific_menus : wday_menus
-          %>
-          
-          <% if display_menus.any? %>
-            <% display_menus.each_with_index do |menu, index| %>
-              <% if index < 3 %>
+          <!-- メニュー詳細表示 -->
+          <div class="p-2 space-y-2 h-full">
+            <% if day_menus.any? %>
+              <% day_menus.each do |menu| %>
                 <div class="bg-gradient-to-r from-blue-100 to-blue-50 border-l-4 border-blue-400 rounded-r px-2 py-2 shadow-sm">
                   <div class="font-semibold text-blue-900 text-xs mb-1">
                     <%= menu.name %>
                   </div>
                   <% if menu.description.present? %>
                     <div class="text-blue-700 text-xs leading-relaxed">
-                      <%= truncate(menu.description, length: 60) %>
+                      <%= truncate(menu.description, length: 80) %>
                     </div>
                   <% end %>
                 </div>
-              <% elsif index == 3 %>
-                <div class="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded">
-                  +<%= display_menus.count - 3 %>件
-                </div>
               <% end %>
+            <% else %>
+              <div class="text-xs text-gray-400 py-4 text-center">
+                メニューなし
+              </div>
             <% end %>
-          <% else %>
-            <div class="text-xs text-gray-400 py-4 text-center">
-              メニューなし
-            </div>
-          <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
+</main>
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

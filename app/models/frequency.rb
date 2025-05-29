@@ -1,3 +1,6 @@
 class Frequency < ApplicationRecord
-  has_one :users
+  validates :name, presence: true, uniqueness: true
+  
+  has_many :users
+  has_many :weekly_menus
 end

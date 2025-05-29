@@ -72,3 +72,68 @@
 
 ・カレンダー
   Google Calendar API
+
+## フィットネス管理アプリ
+
+週次トレーニングメニューをカレンダー形式で管理できるフィットネスアプリケーションです。
+
+### 主要機能
+- ユーザー認証（Devise）
+- プラン管理（健康維持、ダイエット、ゴリマッチョ）
+- 週次メニューの作成・編集・削除
+- カレンダー表示でのメニュー確認
+- トレーニング頻度設定
+
+### テスト実行方法
+
+#### 全テスト実行
+```bash
+# Dockerコンテナ内でテスト実行
+docker compose exec web bundle exec rspec
+
+# 詳細出力でテスト実行
+docker compose exec web bundle exec rspec --format documentation
+
+# 特定のテストファイルのみ実行
+docker compose exec web bundle exec rspec spec/models/user_spec.rb
+```
+
+#### テストの種類
+- **モデルテスト**: バリデーション、アソシエーション、ファクトリーのテスト
+- **コントローラーテスト**: アクション、認証、レスポンスのテスト
+- **リクエストテスト**: HTTPリクエスト・レスポンスのテスト
+- **システムテスト**: ブラウザ操作の統合テスト
+
+#### テストカバレッジ
+- User モデル: 認証、プラン・頻度の関連
+- Plan モデル: プラン種別、メニューとの関連
+- WeeklyMenu モデル: スケジュール管理、プランとの関連
+- Frequency モデル: 頻度設定
+- WeeklyMenusController: CRUD操作、認証
+- システムテスト: E2Eテスト
+
+#### 使用テストツール
+- **RSpec**: テストフレームワーク
+- **Factory Bot**: テストデータ生成
+- **Faker**: ダミーデータ生成
+- **Shoulda Matchers**: モデルテスト用マッチャー
+- **Capybara**: システムテスト用ブラウザ操作
+- **Devise Test Helpers**: 認証テスト用ヘルパー
+
+### 開発環境セットアップ
+
+```bash
+# アプリケーション起動
+docker compose up -d
+
+# データベース作成・マイグレーション
+docker compose exec web rails db:create
+docker compose exec web rails db:migrate
+
+# シードデータ投入
+docker compose exec web rails db:seed
+
+# テスト用データベース準備
+docker compose exec web rails db:create RAILS_ENV=test
+docker compose exec web rails db:migrate RAILS_ENV=test
+```
