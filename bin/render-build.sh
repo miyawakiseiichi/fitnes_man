@@ -12,6 +12,9 @@ yarn build
 # アセットのプリコンパイル
 bundle exec rake assets:precompile
 
+# マイグレーション前にFrequencyデータを確実に作成
+bundle exec rake db:ensure_frequencies
+
 # ★ 本番用マイグレーションをここで実行（重要！）
 bundle exec rails db:migrate
 
