@@ -52,9 +52,14 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 
 # Google認証用のgem
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
+
+# Security updates
+gem "nokogiri", ">= 1.18.9"
+gem "rack", ">= 3.1.16"
+gem "oauth2", ">= 2.0.12"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -67,13 +72,14 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # RSpec for testing
-  gem 'rspec-rails', '~> 6.0'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'shoulda-matchers', '~> 5.0'
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem "rspec-rails", "~> 6.0"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "shoulda-matchers", "~> 5.0"
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
+  gem "rails-controller-testing"
 end
 
 group :development do
@@ -81,12 +87,6 @@ group :development do
   gem "web-console"
 
   # Highlight the fine-grained location where an error occurred [https://github.com/ruby/error_highlight]
-end
-
-group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
 end
 
 gem "simple_calendar", "~> 3.1"

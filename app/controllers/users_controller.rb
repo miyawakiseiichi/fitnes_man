@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [ :show, :edit, :update ]
 
   def new
     @user = User.new
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'プロフィールが更新されました。'
+      redirect_to @user, notice: "プロフィールが更新されました。"
     else
       @plans = Plan.all
       @frequencies = Frequency.all

@@ -1,6 +1,6 @@
 class ProteinsController < ApplicationController
   before_action :authenticate_user! # ユーザー認証が必要
-  
+
   def index
     @recommended_products = [
       {
@@ -72,7 +72,7 @@ class ProteinsController < ApplicationController
     if params[:search].present?
       search_term = params[:search].downcase
       @search_results = @recommended_products.select do |product|
-        product[:name].downcase.include?(search_term) || 
+        product[:name].downcase.include?(search_term) ||
         product[:description].downcase.include?(search_term)
       end
     end

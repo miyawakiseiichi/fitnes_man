@@ -12,7 +12,8 @@ default: &default
   password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
   host: <%= ENV['DATABASE_HOST'] || 'db' %>
   port: <%= ENV['DATABASE_PORT'] || 5432 %>
-
+  connect_timeout: <%= ENV.fetch("DATABASE_CONNECT_TIMEOUT", 10) %>
+  checkout_timeout: <%= ENV.fetch("DATABASE_CHECKOUT_TIMEOUT", 5) %>
 
 development:
   <<: *default
@@ -24,8 +25,11 @@ development:
 test:
   <<: *default
   database: fitnes_man_test
-
-
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  username: <%= ENV['DATABASE_USER'] || 'postgres' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'password' %>
+  connect_timeout: <%= ENV.fetch("DATABASE_CONNECT_TIMEOUT", 30) %>
+  checkout_timeout: <%= ENV.fetch("DATABASE_CHECKOUT_TIMEOUT", 10) %>
 
 # SQLite3 write its data on the local filesystem, as such it requires
 # persistent disks. If you are deploying to a managed service, you should

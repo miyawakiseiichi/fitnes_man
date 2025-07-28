@@ -63,10 +63,19 @@ RSpec.configure do |config|
 
   # Factory Bot configuration
   config.include FactoryBot::Syntax::Methods
-  
+
   # Devise helpers
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :controller
+
+  # Set locale to English for tests to avoid translation issues
+  config.before(:each) do
+    I18n.locale = :en
+  end
+
+  config.after(:each) do
+    I18n.locale = I18n.default_locale
+  end
 end
 
 # Shoulda Matchers configuration

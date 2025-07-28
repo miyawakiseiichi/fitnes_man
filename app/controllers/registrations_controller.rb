@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [ :create ]
 
   def new
     super
@@ -8,11 +8,11 @@ class RegistrationsController < Devise::RegistrationsController
       Rails.logger.debug "==== Google Auth Data Debug ===="
       Rails.logger.debug "Auth data: #{auth_data.inspect}"
       Rails.logger.debug "================================"
-      
+
       begin
         if auth_data.present?
           resource.email = auth_data["email"]
-          resource.username = auth_data["username"] || auth_data["email"]&.split('@')&.first
+          resource.username = auth_data["username"] || auth_data["email"]&.split("@")&.first
         end
       rescue => e
         Rails.logger.error "Error setting user data: #{e.message}"
@@ -31,13 +31,13 @@ class RegistrationsController < Devise::RegistrationsController
       Rails.logger.debug "==== Create Action Google Auth Data ===="
       Rails.logger.debug "Auth data: #{auth_data.inspect}"
       Rails.logger.debug "================================"
-      
+
       begin
         resource.email = auth_data["email"] if resource.email.blank?
-        resource.username = auth_data["username"] || auth_data["email"]&.split('@')&.first if resource.username.blank?
-        
+        resource.username = auth_data["username"] || auth_data["email"]&.split("@")&.first if resource.username.blank?
+
         # OAuth関連のデータを設定
-        if User.column_names.include?('provider') && User.column_names.include?('uid')
+        if User.column_names.include?("provider") && User.column_names.include?("uid")
           resource.provider = auth_data["provider"]
           resource.uid = auth_data["uid"]
         end
@@ -62,14 +62,14 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :frequency_id, :plan_id])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :username, :email, :frequency_id, :plan_id ])
   end
 
   def sign_up_params
-    base_params = [:username, :email, :password, :password_confirmation, :plan_id, :frequency_id]
+    base_params = [ :username, :email, :password, :password_confirmation, :plan_id, :frequency_id ]
     # providerとuidカラムが存在する場合のみ許可
-    if User.column_names.include?('provider') && User.column_names.include?('uid')
-      base_params += [:provider, :uid]
+    if User.column_names.include?("provider") && User.column_names.include?("uid")
+      base_params += [ :provider, :uid ]
     end
     params.require(:user).permit(base_params)
   end

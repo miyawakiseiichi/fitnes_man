@@ -2,13 +2,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     Rails.logger.info "Starting Google OAuth callback"
     Rails.logger.info "Request parameters: #{request.params.inspect}"
-    Rails.logger.info "Request env: #{request.env['omniauth.auth'].to_json}" if request.env['omniauth.auth']
+    Rails.logger.info "Request env: #{request.env['omniauth.auth'].to_json}" if request.env["omniauth.auth"]
 
     begin
-      auth = request.env['omniauth.auth']
+      auth = request.env["omniauth.auth"]
       # まず、既存のユーザーを検索
       @user = User.find_by(email: auth.info.email)
-      
+
       if @user
         # 既存ユーザーの場合
         @user.update(
@@ -16,7 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           uid: auth.uid,
           name: auth.info.name
         )
-        flash[:notice] = 'ログインしました'
+        flash[:notice] = "ログインしました"
         sign_in_and_redirect @user, event: :authentication
       else
         # 新規ユーザーの場合、セッションにGoogle認証情報を保存して登録画面へ
@@ -24,11 +24,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         session["devise.google_data"] = {
           email: auth.info.email,
           name: auth.info.name,
-          username: auth.info.email.split('@').first,
+          username: auth.info.email.split("@").first,
           provider: auth.provider,
           uid: auth.uid
         }
-        flash[:notice] = 'アカウント情報を入力して登録を完了してください'
+        flash[:notice] = "アカウント情報を入力して登録を完了してください"
         redirect_to new_user_registration_path
       end
     rescue => e

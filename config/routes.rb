@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   get "privacy_policies/show"
   devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'registrations'
+    omniauth_callbacks: "users/omniauth_callbacks",
+    registrations: "registrations"
   }
 
   # OmniAuthのコールバックルートを明示的に定義
   devise_scope :user do
-    get 'users/auth/google_oauth2/callback' => 'users/omniauth_callbacks#google_oauth2'
+    get "users/auth/google_oauth2/callback" => "users/omniauth_callbacks#google_oauth2"
   end
 
   root "home#index"
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :proteins
   resources :weekly_menus
 
-  get 'privacy_policy', to: 'privacy_policies#show', as: 'privacy_policy'
+  get "privacy_policy", to: "privacy_policies#show", as: "privacy_policy"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -50,5 +50,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [ :show, :edit, :update ]
 end

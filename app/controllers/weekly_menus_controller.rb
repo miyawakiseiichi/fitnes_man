@@ -8,12 +8,12 @@ class WeeklyMenusController < ApplicationController
     @end_date = @date.end_of_month.end_of_week(:sunday)
     @plan = current_user.plan
     @frequency = current_user.frequency
-    
+
     # プランと頻度に関連する全てのメニューを取得
     if @plan && @frequency
       @weekly_menus = WeeklyMenu.for_plan_and_frequency(@plan, @frequency)
       @plan_menus = @weekly_menus.group_by { |menu| menu.scheduled_date&.wday || 0 }
-      
+
       # メニューがない場合の処理
       if @weekly_menus.empty?
         @menus_by_day = {}
@@ -25,7 +25,7 @@ class WeeklyMenusController < ApplicationController
       @weekly_menus = []
       @plan_menus = {}
       @menus_by_day = {}
-      
+
       if @plan.nil?
         flash.now[:warning] = "プランを選択してください。"
       elsif @frequency.nil?

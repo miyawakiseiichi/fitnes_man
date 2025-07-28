@@ -5,7 +5,7 @@ FactoryBot.define do
     password_confirmation { "password123" }
     sequence(:name) { |n| "Test User #{n}" }
     sequence(:username) { |n| "testuser#{n}" }
-    
+
     association :plan
     association :frequency
 
@@ -25,4 +25,4 @@ FactoryBot.define do
       # Add admin attributes if needed
     end
   end
-end 
+end

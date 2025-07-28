@@ -1,13 +1,21 @@
 FactoryBot.define do
   factory :frequency do
-    name { "週2~3回" }
+    sequence(:name) { |n| "週#{n}回" }
 
-    trait :once_a_week do
-      name { "週1回" }
+    trait :weekly do
+      sequence(:name) { |n| "週1回 #{n}" }
     end
 
-    trait :two_to_three_times do
-      name { "週2~3回" }
+    trait :twice_weekly do
+      sequence(:name) { |n| "週2回 #{n}" }
+    end
+
+    trait :three_times_weekly do
+      sequence(:name) { |n| "週3回 #{n}" }
+    end
+
+    trait :daily do
+      sequence(:name) { |n| "毎日 #{n}" }
     end
 
     trait :four_to_five_times do
@@ -18,4 +26,4 @@ FactoryBot.define do
       name { "週6~7回" }
     end
   end
-end 
+end
