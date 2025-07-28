@@ -1,4 +1,4 @@
-require 'simple_calendar'
+require "simple_calendar"
 
 module SimpleCalendar
   class Calendar
@@ -7,7 +7,7 @@ module SimpleCalendar
     end
 
     def weekend
-      [0, 6]
+      [ 0, 6 ]
     end
 
     def weekend_color
@@ -22,4 +22,4 @@ module SimpleCalendar
       "bg-gray-50"
     end
   end
-end 
+end

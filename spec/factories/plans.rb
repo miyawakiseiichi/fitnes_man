@@ -22,4 +22,4 @@ FactoryBot.define do
       description { "ハードトレーニングプラン" }
     end
   end
-end 
+end

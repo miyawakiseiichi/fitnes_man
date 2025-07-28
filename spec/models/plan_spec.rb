@@ -54,4 +54,4 @@ RSpec.describe Plan, type: :model do
       expect(Plan.count).to eq(3)
     end
   end
-end 
+end

@@ -182,4 +182,4 @@ RSpec.describe WeeklyMenusController, type: :controller do
       expect(response).to redirect_to(weekly_menus_url)
     end
   end
-end 
+end

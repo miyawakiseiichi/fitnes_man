@@ -4,7 +4,7 @@ class Calendar < SimpleCalendar::Calendar
   end
 
   def weekend
-    [0, 6]
+    [ 0, 6 ]
   end
 
   def weekend_color
@@ -18,4 +18,4 @@ class Calendar < SimpleCalendar::Calendar
   def other_month_color
     "bg-gray-50"
   end
-end 
+end

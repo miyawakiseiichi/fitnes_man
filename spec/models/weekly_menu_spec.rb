@@ -53,7 +53,7 @@ RSpec.describe WeeklyMenu, type: :model do
       it 'returns menus for specific week' do
         week_start = Date.current.beginning_of_week
         week_end = Date.current.end_of_week
-        
+
         menus_in_week = WeeklyMenu.where(scheduled_date: week_start..week_end)
         expect(menus_in_week.count).to eq(3)
       end
@@ -85,7 +85,7 @@ RSpec.describe WeeklyMenu, type: :model do
   describe 'class methods' do
     let(:plan) { create(:plan) }
     let(:frequency) { create(:frequency) }
-    
+
     before do
       create(:weekly_menu, plan: plan, frequency: frequency, scheduled_date: Date.current.beginning_of_week)
       create(:weekly_menu, plan: plan, frequency: frequency, scheduled_date: Date.current.beginning_of_week + 1.day)
@@ -101,9 +101,9 @@ RSpec.describe WeeklyMenu, type: :model do
       another_plan = create(:plan, name: 'Another Plan', title: 'Another Plan')
       another_frequency = create(:frequency, name: '週10回')
       create(:weekly_menu, plan: another_plan, frequency: another_frequency)
-      
+
       filtered_menus = WeeklyMenu.for_plan_and_frequency(plan, frequency)
       expect(filtered_menus.count).to eq(3)
     end
   end
-end 
+end

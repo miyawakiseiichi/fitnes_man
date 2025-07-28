@@ -69,4 +69,4 @@ RSpec.describe Frequency, type: :model do
       expect(user.frequency).to eq(frequency)
     end
   end
-end 
+end

@@ -29,4 +29,4 @@ RSpec.describe 'Test Summary', type: :lib do
       expect(user.frequency).to be_present
     end
   end
-end 
+end

@@ -1,7 +1,7 @@
 class WeeklyMenu < ApplicationRecord
   belongs_to :plan
   belongs_to :frequency
-  
+
   validates :name, presence: true
   validates :description, presence: true
   validates :scheduled_date, presence: true
@@ -10,7 +10,7 @@ class WeeklyMenu < ApplicationRecord
   scope :for_plan_and_frequency, ->(plan, frequency) {
     where(plan: plan, frequency: frequency)
   }
-  
+
   # スコープ: 特定の週の範囲でフィルタリング
   scope :for_week, ->(date = Date.today) {
     start_date = date.beginning_of_week

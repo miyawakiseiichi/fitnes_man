@@ -12,7 +12,7 @@ RSpec.describe 'WeeklyMenus', type: :system do
     visit new_user_session_path
     fill_in 'user_email', with: user.email
     fill_in 'user_password', with: 'password123'
-    click_button 'Log in'
+    click_button 'ログイン'
   end
 
   def sign_out_user
@@ -32,7 +32,7 @@ RSpec.describe 'WeeklyMenus', type: :system do
 
       expect(page).to have_content(user.plan.title)
       expect(page).to have_content(Date.current.strftime('%Y年%m月'))
-      
+
       # Check for calendar grid
       expect(page).to have_css('.calendar-grid')
       expect(page).to have_content('日')
@@ -46,7 +46,7 @@ RSpec.describe 'WeeklyMenus', type: :system do
 
     it 'shows workout details in calendar cells' do
       visit weekly_menus_path
-      
+
       # Should show workout names in calendar
       expect(page).to have_content(monday_menu.name)
       expect(page).to have_content(monday_menu.description)
@@ -54,11 +54,11 @@ RSpec.describe 'WeeklyMenus', type: :system do
 
     it 'allows navigation between months' do
       visit weekly_menus_path
-      
+
       # Navigate to next month
       click_link '次月'
       expect(page).to have_content((Date.current + 1.month).strftime('%Y年%m月'))
-      
+
       # Navigate back to previous month
       click_link '前月'
       expect(page).to have_content(Date.current.strftime('%Y年%m月'))
@@ -76,7 +76,7 @@ RSpec.describe 'WeeklyMenus', type: :system do
       fill_in 'weekly_menu_name', with: 'テスト用ワークアウト'
       fill_in 'weekly_menu_description', with: 'テスト用の詳細説明'
       fill_in 'weekly_menu_scheduled_date', with: Date.current.strftime('%Y-%m-%d')
-      
+
       click_button 'Create Weekly menu'
 
       expect(page).to have_content('テスト用ワークアウト')
@@ -130,7 +130,7 @@ RSpec.describe 'WeeklyMenus', type: :system do
 
       fill_in 'weekly_menu_name', with: '更新されたワークアウト'
       fill_in 'weekly_menu_description', with: '更新された詳細説明'
-      
+
       click_button 'Update Weekly menu'
 
       expect(page).to have_content('更新されたワークアウト')
@@ -143,7 +143,7 @@ RSpec.describe 'WeeklyMenus', type: :system do
 
       fill_in 'weekly_menu_name', with: ''
       fill_in 'weekly_menu_description', with: ''
-      
+
       click_button 'Update Weekly menu'
 
       expect(page).to have_content("Name can't be blank")
@@ -207,7 +207,7 @@ RSpec.describe 'WeeklyMenus', type: :system do
       visit weekly_menus_path
 
       expect(page).to have_current_path(new_user_session_path)
-      expect(page).to have_content('Log in')
+      expect(page).to have_content('ログイン')
     end
 
     it 'allows access after signing in' do
@@ -215,10 +215,13 @@ RSpec.describe 'WeeklyMenus', type: :system do
 
       fill_in 'user_email', with: user.email
       fill_in 'user_password', with: 'password123'
-      click_button 'Log in'
+      click_button 'ログイン'
 
-      expect(page).to have_current_path(weekly_menus_path)
+      # ApplicationControllerの設定により、ログイン後はマイページにリダイレクトされる
+      expect(page).to have_current_path(mypage_path)
+      # その後、weekly_menusページに直接アクセスできることを確認
+      visit weekly_menus_path
       expect(page).to have_content(user.plan.title)
     end
   end
-end 
+end
